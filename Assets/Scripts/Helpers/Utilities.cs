@@ -17,6 +17,12 @@ namespace Helpers
         public Color ıtemColor;
     }
 
+    public enum ItemType
+    {
+        PuzzleArea, 
+        TargetArea
+    }
+
     public enum GameColors
     {
         White,
@@ -40,6 +46,7 @@ namespace Helpers
     {
         public int xCoord;
         public int yCoord;
+        public ItemType cellType;
     }
 
     
@@ -49,5 +56,6 @@ namespace Helpers
         public int xCoord;
         public int yCoord;
         public int layer;
+        public ItemType tileType;
     }
 }

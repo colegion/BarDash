@@ -50,7 +50,7 @@ namespace Helpers
             {
                 var go = hit.collider.gameObject;
 
-                if (go.TryGetComponent<ITappable>(out ITappable item))
+                if (go.TryGetComponent(out ITappable item))
                 {
                     tappable = item;
                     return true;

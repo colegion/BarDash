@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Helpers;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    private int _x;
-    private int _y;
+    public int X { get; private set; }
 
-    public int X => _x;
-    public int Y => _y;
+    public int Y { get; private set; }
+
+    public ItemType CellArea { get; private set; }
 
     private Dictionary<int, Tile> _tiles;
 
-    public void ConfigureSelf(int x, int y)
+    public void ConfigureSelf(CellData data)
     {
-        _x = x;
-        _y = y;
+        X = data.xCoord;
+        Y = data.yCoord;
+        CellArea = data.cellType;
         _tiles = new Dictionary<int, Tile>();
     }
 
