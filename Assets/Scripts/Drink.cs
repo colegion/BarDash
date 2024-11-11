@@ -4,15 +4,10 @@ using Helpers;
 using Interfaces;
 using UnityEngine;
 
-public class Drink : BaseTile, ITappable
+public class Drink : BaseTile
 {
     public override void Move()
     {
         
-    }
-
-    public void OnTap()
-    {
-        throw new System.NotImplementedException();
     }
 }
