@@ -33,6 +33,11 @@ namespace Helpers
             baseTile.SetParentCell(this);
         }
 
+        public bool IsTileAvailable(int layer)
+        {
+            return _tiles[layer] == null;
+        }
+
         public BaseTile GetTile(int layer)
         {
             return _tiles[layer];

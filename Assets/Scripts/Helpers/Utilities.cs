@@ -10,6 +10,15 @@ namespace Helpers
         [SerializeField] private List<ColorClass> gameColors;
 
         private static List<ColorClass> _colors;
+
+        public static Dictionary<Direction, Vector2Int> Vectors = new Dictionary<Direction, Vector2Int>()
+        {
+            { Direction.Up, Vector2Int.up },
+            { Direction.Right, Vector2Int.right },
+            { Direction.Down, Vector2Int.down },
+            { Direction.Left, Vector2Int.left }
+        };
+        
         private void Awake()
         {
             _colors = gameColors;
@@ -51,6 +60,14 @@ namespace Helpers
         Orange,
         Brown,
         Pink
+    }
+
+    public enum Direction
+    {
+        Up,
+        Right,
+        Down,
+        Left
     }
 
     [Serializable]

@@ -5,17 +5,20 @@ namespace Helpers
 {
     public class BaseTile : MonoBehaviour, IMovable
     {
-        protected int X;
-        protected int Y;
+        private int _x;
+        private int _y;
         private int _layer;
         private Cell _parentCell;
         private ItemType _tileArea;
         private GameColors _tileColor;
 
+        public int X => _x;
+        public int Y => _y;
+
         public void ConfigureSelf(TileData data)
         {
-            X = data.xCoord;
-            Y = data.yCoord;
+            _x = data.xCoord;
+            _y = data.yCoord;
             _tileArea = data.tileType;
             _tileColor = data.tileColor;
             _layer = data.layer;
@@ -24,7 +27,7 @@ namespace Helpers
         
         private void SetTransform()
         {
-            transform.position = new Vector3(X, 0, Y);
+            transform.position = new Vector3(_x, 0, _y);
         }
     
         public void SetParentCell(Cell parent)
@@ -35,6 +38,11 @@ namespace Helpers
         public int GetLayer()
         {
             return _layer;
+        }
+
+        public ItemType GetItemType()
+        {
+            return _tileArea;
         }
 
         public virtual void Move()
