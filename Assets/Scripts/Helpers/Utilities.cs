@@ -8,6 +8,25 @@ namespace Helpers
     public class Utilities : MonoBehaviour
     {
         [SerializeField] private List<ColorClass> gameColors;
+
+        private static List<ColorClass> _colors;
+        private void Awake()
+        {
+            _colors = gameColors;
+        }
+
+        public static Color GetColor(GameColors colorEnum)
+        {
+            foreach (var c in _colors)
+            {
+                if (c.colorEnum == colorEnum)
+                {
+                    return c.ıtemColor;
+                }
+            }
+
+            return Color.yellow;
+        }
     }
 
     [Serializable]
@@ -57,5 +76,6 @@ namespace Helpers
         public int yCoord;
         public int layer;
         public ItemType tileType;
+        public GameColors tileColor;
     }
 }

@@ -24,7 +24,7 @@ namespace Helpers
             }
 
             var tiles = levelData.tiles;
-            var tileObject = Resources.Load<Tile>(_tilePath);
+            var tileObject = Resources.Load<BaseTile>(_tilePath);
             foreach (var tile in tiles)
             {
                 var tempTile = Object.Instantiate(tileObject);
