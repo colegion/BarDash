@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Helpers
 {
@@ -7,11 +9,10 @@ namespace Helpers
     {
         private readonly string _cellPath = "Utilities/Cell";
         private readonly string _tilePath = "Utilities/Tile";
-        private Dictionary<ItemType, List<Cell>> _cells;
-        
-        public void GenerateLevel(LevelData levelData)
+        private Dictionary<ItemType, Cell[,]> _cells;
+        public Dictionary<ItemType, Cell[,]> GenerateLevel(LevelData levelData)
         {
-            _cells = new Dictionary<ItemType, List<Cell>>();
+            _cells = new Dictionary<ItemType, Cell[,]>();
 
             var levelCells = levelData.cells;
             var cellObject = Resources.Load<Cell>(_cellPath);
@@ -35,14 +36,16 @@ namespace Helpers
                     parentCell.SetTile(tempTile);
                 }
             }
+
+            return _cells;
         }
 
         private void AppendCells(Cell cell)
         {
-            if (!_cells.TryAdd(cell.CellArea, new List<Cell>()))
+            if (!_cells.TryAdd(cell.CellArea, new Cell[,]{}))
             {
                 var list = _cells[cell.CellArea];
-                list.Add(cell);
+                list[cell.X, cell.Y] = cell;
                 _cells[cell.CellArea] = list;
             }
         }
@@ -50,7 +53,16 @@ namespace Helpers
         private Cell GetCell(TileData data)
         {
             var list = _cells[data.tileType];
-            return list.Find(cell => cell.X == data.xCoord && cell.Y == data.yCoord);
+            for(int i = 0; i < list.Length; i++)
+            {
+                for (int j = 0; j < list.Length; j++)
+                {
+                    if (i == data.xCoord && j == data.yCoord)
+                        return list[i, j];
+                }
+            }
+
+            return null;
         }
     }
 }

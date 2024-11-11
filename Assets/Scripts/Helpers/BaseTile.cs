@@ -19,6 +19,12 @@ namespace Helpers
             _tileArea = data.tileType;
             _tileColor = data.tileColor;
             _layer = data.layer;
+            SetTransform();
+        }
+        
+        private void SetTransform()
+        {
+            transform.position = new Vector3(X, 0, Y);
         }
     
         public void SetParentCell(Cell parent)

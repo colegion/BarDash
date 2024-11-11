@@ -6,13 +6,18 @@ using UnityEngine;
 
 public class Waitress : BaseTile, ITappable
 {
-    public override void Move()
-    {
-        
-    }
-
     public void OnTap()
     {
-        throw new System.NotImplementedException();
+        Move();
+    }
+    
+    public override void Move()
+    {
+        TryFindPath();
+    }
+
+    private void TryFindPath()
+    {
+        
     }
 }

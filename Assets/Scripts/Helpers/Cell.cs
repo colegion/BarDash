@@ -19,6 +19,12 @@ namespace Helpers
             Y = data.yCoord;
             CellArea = data.cellType;
             _tiles = new Dictionary<int, BaseTile>();
+            SetTransform();
+        }
+
+        private void SetTransform()
+        {
+            transform.position = new Vector3(X, 0, Y);
         }
 
         public void SetTile(BaseTile baseTile)
