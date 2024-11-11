@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    protected int X;
-    protected int Y;
+    private int _x;
+    private int _y;
+
+    public int X => _x;
+    public int Y => _y;
 
     private Dictionary<int, Tile> _tiles;
 
     public void ConfigureSelf(int x, int y)
     {
-        X = x;
-        Y = y;
+        _x = x;
+        _y = y;
         _tiles = new Dictionary<int, Tile>();
     }
 
