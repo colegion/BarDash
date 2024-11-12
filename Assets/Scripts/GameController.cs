@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GoalSystem;
 using Helpers;
 using UnityEngine;
+using System.Linq;
 
 public class GameController : MonoBehaviour
 {
-   private GameController _instance;
+   [SerializeField] private SlotController slotController;
+   
+   private static GameController _instance;
    private LevelGenerator _levelGenerator;
    private Dictionary<ItemType, Cell[,]> _grid;
    private const int _waitressLayer = 1;
    
-   public GameController Instance
+   public static GameController Instance
    {
       get
       {
@@ -107,6 +111,25 @@ public class GameController : MonoBehaviour
 
       cell = null;
       return false;
+   }
+
+   public List<Cell> GetDrinkBottomCells()
+   {
+      var grid = _grid[ItemType.DrinkArea];
+      List<Cell> bottomCells = new List<Cell>();
+
+      int rows = grid.GetLength(0);
+      for (int x = 0; x < rows; x++)
+      {
+         bottomCells.Add(grid[x, 0]);
+      }
+      return bottomCells;
+   }
+
+
+   public bool IsInputAcceptable()
+   {
+      return slotController.IsAvailableSlotExist();
    }
 
    private void AddListeners()

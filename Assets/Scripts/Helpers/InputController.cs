@@ -8,9 +8,9 @@ namespace Helpers
 {
     public class InputController : MonoBehaviour
     {
-        private InputController _instance;
+        private static InputController _instance;
         
-        public InputController Instance
+        public static InputController Instance
         {
             get
             {
@@ -61,9 +61,14 @@ namespace Helpers
             return false;
         }
 
-        public void AppendTappable(ITappable tappable)
+        public void AddTappable(ITappable tappable)
         {
             _tappable.Add(tappable);
+        }
+
+        public void RemoveTappable(ITappable tappable)
+        {
+            _tappable.Remove(tappable);
         }
     }
 }

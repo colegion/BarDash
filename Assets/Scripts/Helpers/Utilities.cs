@@ -47,8 +47,8 @@ namespace Helpers
 
     public enum ItemType
     {
-        PuzzleArea, 
-        TargetArea
+        WaitressArea, 
+        DrinkArea
     }
 
     public enum GameColors

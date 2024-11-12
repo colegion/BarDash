@@ -45,6 +45,11 @@ namespace Helpers
             return _tileArea;
         }
 
+        public GameColors GetTileColor()
+        {
+            return _tileColor;
+        }
+
         public virtual void Move()
         {
             throw new System.NotImplementedException();
