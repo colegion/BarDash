@@ -30,10 +30,10 @@ public class Waitress : BaseTile, ITappable
 
     public void OnTap()
     {
-        Move();
+        Move(null);
     }
     
-    public override void Move()
+    public override void Move(Transform target)
     {
         if (GameController.Instance.IsInputAcceptable())
         {

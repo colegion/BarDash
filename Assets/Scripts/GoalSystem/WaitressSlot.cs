@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GoalSystem
@@ -5,7 +6,9 @@ namespace GoalSystem
     public class WaitressSlot : MonoBehaviour
     {
         [SerializeField] private Transform waitressTarget;
-        
+        private List<Drink> _drinkRefs = new List<Drink>(TargetDrinkCount);     
+        private const int TargetDrinkCount = 3;
+        private int _currentDrinkCount = 0;
         private Waitress _waitress;
 
         public void SetWaitressRef(Waitress waitress)
@@ -23,6 +26,12 @@ namespace GoalSystem
             return _waitress != null;
         }
 
+        public void AppendDrinks(Drink drink)
+        {
+            if (_drinkRefs.Capacity == _drinkRefs.Count) return;
+            _drinkRefs.Add(drink);
+        }
+
         public Transform GetTarget()
         {
             return waitressTarget;
@@ -31,6 +40,7 @@ namespace GoalSystem
         public void ResetSelf()
         {
             _waitress = null;
+            _currentDrinkCount = 0;
         }
     }
 }

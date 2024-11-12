@@ -39,6 +39,8 @@ namespace GoalSystem
                 var slot = TryGetAvailableSlot(color);
                 if(slot != null)
                 {
+                    slot.AppendDrinks((Drink)drink);
+                    drink.Move(slot.GetTarget());
                     //@todo: BERKE BURDA UYGUN SLOTU BULDUK İÇECEK DE HAZIR BURDAN TRİGGERLANMALI BİŞEYLER.
                 }
             }

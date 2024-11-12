@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class Drink : BaseTile
 {
-    public override void Move()
+    [SerializeField] private float moveDuration;
+    [SerializeField] private AnimationCurve moveCurve;
+    
+    public override void Move(Transform target)
     {
         
     }

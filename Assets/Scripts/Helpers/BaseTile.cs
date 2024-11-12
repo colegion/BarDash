@@ -50,7 +50,7 @@ namespace Helpers
             return _tileColor;
         }
 
-        public virtual void Move()
+        public virtual void Move(Transform target)
         {
             throw new System.NotImplementedException();
         }
