@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e2d7f6cbde3704ab369d3c5e6fe45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileMaterial: {fileID: 2100000, guid: 7cc52b2f000c67546a6a95438450bd63, type: 2}
   moveDuration: 0.25
   moveCurve:
     serializedVersion: 2
