@@ -29,6 +29,7 @@ namespace GoalSystem
         public void AppendDrinks(Drink drink)
         {
             if (_drinkRefs.Capacity == _drinkRefs.Count) return;
+            _currentDrinkCount++;
             _drinkRefs.Add(drink);
         }
 

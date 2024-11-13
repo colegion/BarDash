@@ -30,7 +30,7 @@ namespace Helpers
             {
                 if (c.colorEnum == colorEnum)
                 {
-                    return c.ıtemColor;
+                    return c.itemColor;
                 }
             }
 
@@ -42,7 +42,7 @@ namespace Helpers
     public class ColorClass
     {
         public GameColors colorEnum;
-        public Color ıtemColor;
+        public Color itemColor;
     }
 
     public enum ItemType
