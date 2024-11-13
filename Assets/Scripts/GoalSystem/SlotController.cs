@@ -7,6 +7,7 @@ namespace GoalSystem
 {
     public class SlotController : MonoBehaviour
     {
+        [SerializeField] private Transform completedWaitressTarget;
         [SerializeField] private DrinkController drinkController;
         [SerializeField] private List<WaitressSlot> slots;
 
@@ -64,7 +65,12 @@ namespace GoalSystem
 
                         // After updating column, check for matches again
                         _isCheckingMatches = false;
-                        CheckMatches();
+                        if (slot.HasCompleted())
+                        {
+                            var waitress = slot.GetWaitressRef();
+                            slot.ResetSelf();
+                            waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
+                        }
                     });
 
                     // Exit the loop to wait for the match animation to finish before re-checking

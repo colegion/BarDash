@@ -32,6 +32,11 @@ namespace GoalSystem
             _drinkRefs.Add(drink);
         }
 
+        public bool HasCompleted()
+        {
+            return _drinkRefs.Capacity == _drinkRefs.Count;
+        }
+
         public Transform GetTarget()
         {
             return waitressTarget;
