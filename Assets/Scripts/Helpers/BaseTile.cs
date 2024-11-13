@@ -6,6 +6,7 @@ namespace Helpers
 {
     public class BaseTile : MonoBehaviour, IMovable
     {
+        [SerializeField] private Material tileMaterial;
         private int _x;
         private int _y;
         private int _layer;
@@ -24,6 +25,7 @@ namespace Helpers
             _tileColor = data.tileColor;
             _layer = data.layer;
             SetTransform();
+            tileMaterial.color = Utilities.GetColor(data.tileColor);
         }
         
         private void SetTransform()
