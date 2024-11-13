@@ -24,8 +24,8 @@ namespace Helpers
 
         private void SetTransform()
         {
-            transform.parent = GameController.Instance.GetParentByType(CellArea);
-            transform.position = new Vector3(X, 0, Y);
+            transform.SetParent(GameController.Instance.GetParentByType(CellArea));
+            transform.localPosition = new Vector3(X, -1, Y);
         }
 
         public void SetTile(BaseTile baseTile)

@@ -6,7 +6,7 @@ namespace Helpers
 {
     public class BaseTile : MonoBehaviour, IMovable
     {
-        [SerializeField] private Material tileMaterial;
+        [SerializeField] private MeshRenderer tileRenderer;
         private int _x;
         private int _y;
         private int _layer;
@@ -25,13 +25,13 @@ namespace Helpers
             _tileColor = (GameColors)data.tileColor;
             _layer = data.layer;
             SetTransform();
-            tileMaterial.color = Utilities.GetColor(_tileColor);
+            tileRenderer.material.color = Utilities.GetColor(_tileColor);
         }
         
         private void SetTransform()
         {
-            transform.parent = GameController.Instance.GetParentByType(_tileArea);
-            transform.position = new Vector3(_x, 0, _y);
+            transform.SetParent(GameController.Instance.GetParentByType(_tileArea));
+            transform.localPosition = new Vector3(_x, 0, _y);
         }
     
         public void SetParentCell(Cell parent)

@@ -23,7 +23,7 @@ namespace GoalSystem
 
         public bool IsAvailable()
         {
-            return _waitress != null;
+            return _waitress == null;
         }
 
         public void AppendDrinks(Drink drink)

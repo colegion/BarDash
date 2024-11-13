@@ -42,7 +42,13 @@ namespace Helpers
         private bool TryGetTappable(out ITappable tappable)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Vector3.down, out hit, 300f, LayerMask.NameToLayer(_layerMask)))
+            tappable = null;
+
+            // Convert the screen position (e.g., touch or mouse click) to a ray
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Cast the ray into the scene
+            if (Physics.Raycast(ray, out hit, 300f))
             {
                 var go = hit.collider.gameObject;
 
@@ -52,10 +58,9 @@ namespace Helpers
                     return true;
                 }
             }
-
-            tappable = null;
             return false;
         }
+
 
         public void AddTappable(ITappable tappable)
         {

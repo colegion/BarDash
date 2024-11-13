@@ -55,7 +55,7 @@ MonoBehaviour:
     itemColor: {r: 0.27200428, g: 0.39582333, b: 0.9547169, a: 1}
   - colorEnum: 4
     itemColor: {r: 0.93962264, g: 0.6462126, b: 0.14005686, a: 1}
-  - colorEnum: 4
+  - colorEnum: 5
     itemColor: {r: 0.3433962, g: 0.24564515, b: 0.11856885, a: 0.88235295}
   - colorEnum: 6
     itemColor: {r: 0.9245283, g: 0.13780695, b: 0.8361653, a: 1}
