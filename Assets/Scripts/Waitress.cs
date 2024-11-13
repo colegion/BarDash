@@ -33,7 +33,7 @@ public class Waitress : BaseTile, ITappable
         Move(null);
     }
     
-    public override void Move(Transform target)
+    public override void Move(Transform target, Action onComplete = null)
     {
         if (GameController.Instance.IsInputAcceptable())
         {

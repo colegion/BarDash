@@ -33,6 +33,16 @@ namespace Helpers
             baseTile.SetParentCell(this);
         }
 
+        public void SetTileNull(int layer)
+        {
+            if (_tiles[layer] != null)
+            {
+                var tile = _tiles[layer];
+                tile.SetParentCell(null);
+                _tiles[layer] = null;
+            }
+        }
+
         public bool IsTileAvailable(int layer)
         {
             return _tiles[layer] == null;
@@ -40,7 +50,7 @@ namespace Helpers
 
         public BaseTile GetTile(int layer)
         {
-            return _tiles[layer];
+            return _tiles.GetValueOrDefault(layer);
         }
     }
 }

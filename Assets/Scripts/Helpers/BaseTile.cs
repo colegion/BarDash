@@ -1,3 +1,4 @@
+using System;
 using Interfaces;
 using UnityEngine;
 
@@ -50,9 +51,9 @@ namespace Helpers
             return _tileColor;
         }
 
-        public virtual void Move(Transform target)
+        public virtual void Move(Transform target, Action onComplete = null)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

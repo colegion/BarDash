@@ -9,7 +9,7 @@ using System.Linq;
 public class GameController : MonoBehaviour
 {
    [SerializeField] private SlotController slotController;
-   
+   [SerializeField] private DrinkController drinkController;
    private static GameController _instance;
    private LevelGenerator _levelGenerator;
    private Dictionary<ItemType, Cell[,]> _grid;
@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
    {
       //todo: Read json by player pref saved level index here.
       _grid = _levelGenerator.GenerateLevel(new LevelData());
+      drinkController.SetDrinkGrid(_grid[ItemType.DrinkArea]);
    }
 
    public bool TryFindPath(BaseTile tile, out List<Cell> travelPath)
@@ -112,21 +113,7 @@ public class GameController : MonoBehaviour
       cell = null;
       return false;
    }
-
-   public List<Cell> GetDrinkBottomCells()
-   {
-      var grid = _grid[ItemType.DrinkArea];
-      List<Cell> bottomCells = new List<Cell>();
-
-      int rows = grid.GetLength(0);
-      for (int x = 0; x < rows; x++)
-      {
-         bottomCells.Add(grid[x, 0]);
-      }
-      return bottomCells;
-   }
-
-
+   
    public bool IsInputAcceptable()
    {
       return slotController.IsAvailableSlotExist();

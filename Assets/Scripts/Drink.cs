@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Helpers;
@@ -9,7 +10,7 @@ public class Drink : BaseTile
     [SerializeField] private float moveDuration;
     [SerializeField] private AnimationCurve moveCurve;
     
-    public override void Move(Transform target)
+    public override void Move(Transform target, Action onComplete = null)
     {
         
     }
