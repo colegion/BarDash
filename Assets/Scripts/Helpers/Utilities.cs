@@ -82,7 +82,7 @@ namespace Helpers
     {
         public int xCoord;
         public int yCoord;
-        public ItemType cellType;
+        public int cellType;
     }
 
     
@@ -92,7 +92,7 @@ namespace Helpers
         public int xCoord;
         public int yCoord;
         public int layer;
-        public ItemType tileType;
-        public GameColors tileColor;
+        public int tileType;
+        public int tileColor;
     }
 }

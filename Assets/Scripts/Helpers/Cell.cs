@@ -17,13 +17,14 @@ namespace Helpers
         {
             X = data.xCoord;
             Y = data.yCoord;
-            CellArea = data.cellType;
+            CellArea = (ItemType)data.cellType;
             _tiles = new Dictionary<int, BaseTile>();
             SetTransform();
         }
 
         private void SetTransform()
         {
+            transform.parent = GameController.Instance.GetParentByType(CellArea);
             transform.position = new Vector3(X, 0, Y);
         }
 

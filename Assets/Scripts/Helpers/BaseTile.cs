@@ -21,11 +21,11 @@ namespace Helpers
         {
             _x = data.xCoord;
             _y = data.yCoord;
-            _tileArea = data.tileType;
-            _tileColor = data.tileColor;
+            _tileArea = (ItemType)data.tileType;
+            _tileColor = (GameColors)data.tileColor;
             _layer = data.layer;
             SetTransform();
-            tileMaterial.color = Utilities.GetColor(data.tileColor);
+            tileMaterial.color = Utilities.GetColor(_tileColor);
         }
         
         private void SetTransform()

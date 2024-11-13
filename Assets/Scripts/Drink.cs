@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Helpers;
 using Interfaces;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class Drink : BaseTile
     
     public override void Move(Transform target, Action onComplete = null)
     {
-        
+        transform.DOMove(target.position, moveDuration).SetEase(moveCurve).OnComplete(() =>
+        {
+            onComplete?.Invoke();
+        });
     }
 }

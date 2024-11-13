@@ -10,7 +10,7 @@ namespace Tweeners
     {
         [SerializeField] private List<TweenConfig> tweenConfigs;
 
-        private Dictionary<TweenType, TweenConfig> _tweenConfigDictionary;
+        private readonly Dictionary<TweenType, TweenConfig> _tweenConfigDictionary = new Dictionary<TweenType, TweenConfig>();
         private void Awake()
         {
             foreach (var config in tweenConfigs)
@@ -49,6 +49,7 @@ namespace Tweeners
     {
         public TweenType type;
         public float duration;
+        public Ease ease;
         public AnimationCurve curve;
     }
 

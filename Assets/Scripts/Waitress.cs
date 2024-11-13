@@ -23,7 +23,7 @@ public class Waitress : BaseTile, ITappable
         AddListeners();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         RemoveListeners();
     }

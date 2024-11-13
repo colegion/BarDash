@@ -18,17 +18,13 @@ namespace Helpers
                 {
                     _instance = new GameObject("InputController").AddComponent<InputController>();
                 }
+                DontDestroyOnLoad(_instance);
                 return _instance;
             }
         }
 
         private List<ITappable> _tappable = new List<ITappable>();
         private readonly string _layerMask = "Input";
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(_instance);
-        }
 
         void Update()
         {

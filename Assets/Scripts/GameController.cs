@@ -5,6 +5,7 @@ using GoalSystem;
 using Helpers;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class GameController : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class GameController : MonoBehaviour
       {
          if (_instance == null)
          {
-            _instance = new GameObject("GameController").AddComponent<GameController>();
+            _instance = FindObjectOfType<GameController>();
          }
          
          return _instance;
@@ -42,15 +43,38 @@ public class GameController : MonoBehaviour
 
    private void Start()
    {
-      _levelGenerator = new LevelGenerator();
+      transform.AddComponent<LevelGenerator>();
+      _levelGenerator = GetComponent<LevelGenerator>();
       LoadLevel();
    }
 
    private void LoadLevel()
    {
-      //todo: Read json by player pref saved level index here.
-      _grid = _levelGenerator.GenerateLevel(new LevelData());
-      drinkController.SetDrinkGrid(_grid[ItemType.DrinkArea]);
+      // Load the JSON text file based on level index, or a default file
+      TextAsset levelFile = Resources.Load<TextAsset>("Levels/TestLevel");
+
+      if (levelFile != null)
+      {
+         // Deserialize JSON into LevelData
+         LevelData levelData = JsonUtility.FromJson<LevelData>(levelFile.text);
+
+         if (levelData != null)
+         {
+            // Use the deserialized data to generate the level grid
+            _grid = _levelGenerator.GenerateLevel(levelData);
+
+            // Set the drink grid to the drink area portion of the generated grid
+            drinkController.SetDrinkGrid(_grid[ItemType.DrinkArea]);
+         }
+         else
+         {
+            Debug.LogError("Failed to parse level data.");
+         }
+      }
+      else
+      {
+         Debug.LogError("Level file not found.");
+      }
    }
 
    public bool TryFindPath(BaseTile tile, out List<Cell> travelPath)

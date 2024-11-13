@@ -68,5 +68,4 @@ public class DrinkController : MonoBehaviour
 
         } while (columnUpdated); // Repeat until no further moves are possible in the column
     }
-
-    }
+}

@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 
 namespace Helpers
 {
-    public class LevelGenerator
+    public class LevelGenerator : MonoBehaviour
     {
         private readonly string _cellPath = "Utilities/Cell";
         private readonly string _waitressPath = "Utilities/Waitress";
@@ -21,7 +21,8 @@ namespace Helpers
 
             foreach (var cell in levelCells)
             {
-                var tempCell = Object.Instantiate(cellObject);
+                var parent = GameController.Instance.GetParentByType((ItemType)cell.cellType);
+                var tempCell = Object.Instantiate(cellObject, parent);
                 tempCell.ConfigureSelf(cell);
                 AppendCells(tempCell);
             }
@@ -30,9 +31,10 @@ namespace Helpers
             
             foreach (var tile in tiles)
             {
-                var path = tile.tileType == ItemType.DrinkArea ? _drinkPath : _waitressPath;
+                var path = (ItemType)tile.tileType == ItemType.DrinkArea ? _drinkPath : _waitressPath;
+                var parent = GameController.Instance.GetParentByType((ItemType)tile.tileType);
                 var tileObject = Resources.Load<BaseTile>(path);
-                var tempTile = Object.Instantiate(tileObject);
+                var tempTile = Object.Instantiate(tileObject, parent);
                 tempTile.ConfigureSelf(tile);
                 var parentCell = GetCell(tile);
                 if (parentCell != null)
@@ -46,7 +48,7 @@ namespace Helpers
 
         private void AppendCells(Cell cell)
         {
-            if (!_cells.TryAdd(cell.CellArea, new Cell[,]{}))
+            if (!_cells.TryAdd(cell.CellArea, new Cell[8,8]))
             {
                 var list = _cells[cell.CellArea];
                 list[cell.X, cell.Y] = cell;
@@ -56,7 +58,7 @@ namespace Helpers
 
         private Cell GetCell(TileData data)
         {
-            var list = _cells[data.tileType];
+            var list = _cells[(ItemType)data.tileType];
             for(int i = 0; i < list.Length; i++)
             {
                 for (int j = 0; j < list.Length; j++)
