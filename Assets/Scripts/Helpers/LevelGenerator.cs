@@ -8,7 +8,9 @@ namespace Helpers
     public class LevelGenerator
     {
         private readonly string _cellPath = "Utilities/Cell";
-        private readonly string _tilePath = "Utilities/Tile";
+        private readonly string _waitressPath = "Utilities/Waitress";
+        private readonly string _drinkPath = "Utilities/Drink";
+        private readonly string _tilePath = "Utilities/BaseTile";
         private Dictionary<ItemType, Cell[,]> _cells;
         public Dictionary<ItemType, Cell[,]> GenerateLevel(LevelData levelData)
         {
@@ -25,9 +27,11 @@ namespace Helpers
             }
 
             var tiles = levelData.tiles;
-            var tileObject = Resources.Load<BaseTile>(_tilePath);
+            
             foreach (var tile in tiles)
             {
+                var path = tile.tileType == ItemType.DrinkArea ? _drinkPath : _waitressPath;
+                var tileObject = Resources.Load<BaseTile>(path);
                 var tempTile = Object.Instantiate(tileObject);
                 tempTile.ConfigureSelf(tile);
                 var parentCell = GetCell(tile);
