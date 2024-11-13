@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 {
    [SerializeField] private SlotController slotController;
    [SerializeField] private DrinkController drinkController;
+   [SerializeField] private Transform drinkParent;
+   [SerializeField] private Transform waitressParent;
    private static GameController _instance;
    private LevelGenerator _levelGenerator;
    private Dictionary<ItemType, Cell[,]> _grid;
@@ -117,6 +119,11 @@ public class GameController : MonoBehaviour
    public bool IsInputAcceptable()
    {
       return slotController.IsAvailableSlotExist();
+   }
+
+   public Transform GetParentByType(ItemType type)
+   {
+      return type == ItemType.DrinkArea ? drinkParent : waitressParent;
    }
 
    private void AddListeners()

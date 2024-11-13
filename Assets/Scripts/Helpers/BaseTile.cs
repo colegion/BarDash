@@ -28,6 +28,7 @@ namespace Helpers
         
         private void SetTransform()
         {
+            transform.parent = GameController.Instance.GetParentByType(_tileArea);
             transform.position = new Vector3(_x, 0, _y);
         }
     
