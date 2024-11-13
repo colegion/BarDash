@@ -73,6 +73,7 @@ namespace Helpers
     [Serializable]
     public class LevelData
     {
+        public List<AreaGridSize> areaGridSizes; 
         public List<CellData> cells;
         public List<TileData> tiles;
     }
@@ -94,5 +95,13 @@ namespace Helpers
         public int layer;
         public int tileType;
         public int tileColor;
+    }
+
+    [Serializable]
+    public class AreaGridSize
+    {
+        public int itemType;
+        public int width;
+        public int height;
     }
 }

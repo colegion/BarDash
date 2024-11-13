@@ -1,4 +1,16 @@
 {
+  "areaGridSizes": [
+    {
+      "itemType": 0,
+      "width": 2,
+      "height": 3
+    },
+    {
+      "itemType": 1,
+      "width": 3,
+      "height": 5
+    }
+  ],
   "cells": [
     {
       "xCoord": 0,

@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
             else
             {
                pathFound = IsPathFound(listToCheck, nextCoord.y);
+               if (pathFound) break;
             }
          }
 
@@ -124,12 +125,17 @@ public class GameController : MonoBehaviour
 
    private bool IsCoordinateValid(Cell[,] grid, int x, int y)
    {
-      return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1);
+      return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1) && grid[x,y] != null;
    }
 
    private bool IsCellAvailable(Cell[,]grid, int x, int y, out Cell cell)
    {
       var temp = grid[x, y];
+      if (temp == null)
+      {
+         cell = null;
+         return false;
+      }
       if (temp.IsTileAvailable(_waitressLayer))
       {
          cell = temp;

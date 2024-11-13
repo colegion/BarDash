@@ -11,10 +11,14 @@ namespace Helpers
         private readonly string _waitressPath = "Utilities/Waitress";
         private readonly string _drinkPath = "Utilities/Drink";
         private readonly string _tilePath = "Utilities/BaseTile";
-        private Dictionary<ItemType, Cell[,]> _cells;
+        private Dictionary<ItemType, Cell[,]> _cells = new Dictionary<ItemType, Cell[,]>();
         public Dictionary<ItemType, Cell[,]> GenerateLevel(LevelData levelData)
         {
-            _cells = new Dictionary<ItemType, Cell[,]>();
+            var grids = levelData.areaGridSizes;
+            foreach (var grid in grids)
+            {
+                _cells[(ItemType)grid.itemType] = new Cell[grid.width, grid.height];
+            }
 
             var levelCells = levelData.cells;
             var cellObject = Resources.Load<Cell>(_cellPath);
