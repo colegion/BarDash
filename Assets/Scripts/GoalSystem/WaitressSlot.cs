@@ -51,6 +51,7 @@ namespace GoalSystem
 
         public void ResetSelf()
         {
+            _drinkRefs.Clear();
             _waitress = null;
             _currentDrinkCount = 0;
         }

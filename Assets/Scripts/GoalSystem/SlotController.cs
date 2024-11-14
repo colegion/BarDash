@@ -58,6 +58,7 @@ namespace GoalSystem
                     {
                         drink.Move(slot.GetTarget(), () =>
                         {
+                            drink.gameObject.SetActive(false);
                             cell.SetTileNull(_drinkLayer);
                             drinkController.UpdateColumn(cell.X);
                             

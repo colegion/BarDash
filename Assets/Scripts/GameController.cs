@@ -115,6 +115,11 @@ public class GameController : MonoBehaviour
       
 
       travelPath = cellsToTravel;
+      if (pathFound)
+      {
+         listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
+      }
+      
       return pathFound;
    }
 

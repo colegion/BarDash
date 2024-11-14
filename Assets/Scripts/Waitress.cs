@@ -57,7 +57,7 @@ public class Waitress : BaseTile, ITappable
         
         foreach (var target in path)
         {
-            Vector3 targetPosition = target.GetWorldPosition();
+            Vector3 targetPosition = target.transform.localPosition + Vector3.up;
             sequence.AppendCallback(() =>
             {
                 tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
@@ -76,6 +76,7 @@ public class Waitress : BaseTile, ITappable
 
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
+        
         tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
         {
             onComplete?.Invoke();
