@@ -9,16 +9,17 @@ namespace Helpers
     public class InputController : MonoBehaviour
     {
         private static InputController _instance;
-        
+
         public static InputController Instance
         {
             get
             {
+
                 if (_instance == null)
                 {
                     _instance = new GameObject("InputController").AddComponent<InputController>();
+                    DontDestroyOnLoad(_instance);
                 }
-                DontDestroyOnLoad(_instance);
                 return _instance;
             }
         }
