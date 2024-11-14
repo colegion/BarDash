@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,12 +13,19 @@ namespace Helpers
         private readonly string _drinkPath = "Utilities/Drink";
         private readonly string _tilePath = "Utilities/BaseTile";
         private Dictionary<ItemType, Cell[,]> _cells = new Dictionary<ItemType, Cell[,]>();
+
+        private const int BaseWidth = 2;
+        private const float BaseXPos = -0.5f;
         public Dictionary<ItemType, Cell[,]> GenerateLevel(LevelData levelData)
         {
             var grids = levelData.areaGridSizes;
             foreach (var grid in grids)
             {
                 _cells[(ItemType)grid.itemType] = new Cell[grid.width, grid.height];
+                var parent = GameController.Instance.GetParentByType((ItemType)grid.itemType);
+                var xPos = BaseXPos * (grid.width - BaseWidth + 1);
+
+                parent.transform.position = new Vector3(xPos, 0, parent.transform.position.z);
             }
 
             var levelCells = levelData.cells;

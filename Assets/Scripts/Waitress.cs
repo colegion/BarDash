@@ -76,7 +76,6 @@ public class Waitress : BaseTile, ITappable
 
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
-        
         tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
         {
             onComplete?.Invoke();

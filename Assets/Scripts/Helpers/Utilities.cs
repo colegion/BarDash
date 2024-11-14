@@ -8,9 +8,7 @@ namespace Helpers
     public class Utilities : MonoBehaviour
     {
         [SerializeField] private List<ColorClass> gameColors;
-
         private static List<ColorClass> _colors;
-
         public static Dictionary<Direction, Vector2Int> Vectors = new Dictionary<Direction, Vector2Int>()
         {
             { Direction.Up, Vector2Int.up },
