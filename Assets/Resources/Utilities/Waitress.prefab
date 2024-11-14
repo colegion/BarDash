@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileRenderer: {fileID: 4446126231497412947}
+  collider: {fileID: 5034518525927664353}
   tweener: {fileID: 8718762684763284327}
 --- !u!114 &8718762684763284327
 MonoBehaviour:
@@ -65,7 +66,7 @@ MonoBehaviour:
   tweenConfigs:
   - type: 0
     duration: 0.2
-    ease: 0
+    ease: 1
     curve:
       serializedVersion: 2
       m_Curve:
@@ -92,7 +93,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   - type: 1
     duration: 0.15
-    ease: 0
+    ease: 1
     curve:
       serializedVersion: 2
       m_Curve:
@@ -119,7 +120,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   - type: 2
     duration: 0.5
-    ease: 0
+    ease: 1
     curve:
       serializedVersion: 2
       m_Curve:
@@ -213,7 +214,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Height: 3
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

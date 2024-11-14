@@ -31,7 +31,7 @@ namespace Tweeners
             var configToUse = _tweenConfigDictionary[moveType];
             waitress.transform.DOMove(target, configToUse.duration).SetEase(configToUse.curve).OnComplete(() =>
             {
-                if (moveType == TweenType.Slot)
+                if (moveType == TweenType.Slot || moveType == TweenType.Success)
                 {
                     onComplete?.Invoke();
                 }

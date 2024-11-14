@@ -30,7 +30,7 @@ namespace Helpers
 
         public void SetTile(BaseTile baseTile)
         {
-            _tiles.TryAdd(baseTile.GetLayer(), baseTile);
+            _tiles[baseTile.GetLayer()] = baseTile;
             baseTile.SetParentCell(this);
         }
 
@@ -52,6 +52,11 @@ namespace Helpers
         public BaseTile GetTile(int layer)
         {
             return _tiles.GetValueOrDefault(layer);
+        }
+
+        public Vector3 GetWorldPosition()
+        {
+            return new Vector3(X, 0, Y);
         }
     }
 }

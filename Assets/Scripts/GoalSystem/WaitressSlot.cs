@@ -10,6 +10,7 @@ namespace GoalSystem
         private const int TargetDrinkCount = 3;
         private int _currentDrinkCount = 0;
         private Waitress _waitress;
+        private bool _clearingSelf;
 
         public void SetWaitressRef(Waitress waitress)
         {
@@ -26,16 +27,21 @@ namespace GoalSystem
             return _waitress == null;
         }
 
-        public void AppendDrinks(Drink drink)
+        public bool AppendDrinks(Drink drink)
         {
-            if (_drinkRefs.Capacity == _drinkRefs.Count) return;
-            _currentDrinkCount++;
+            if (_drinkRefs.Capacity == _drinkRefs.Count) return false;
             _drinkRefs.Add(drink);
+            return true;
+        }
+
+        public void IncrementReachedDrinkCount()
+        {
+            _currentDrinkCount++;
         }
 
         public bool HasCompleted()
         {
-            return _drinkRefs.Capacity == _drinkRefs.Count;
+            return _drinkRefs.Capacity == _drinkRefs.Count && _currentDrinkCount == _drinkRefs.Capacity;
         }
 
         public Transform GetTarget()

@@ -33,39 +33,29 @@ public class DrinkController : MonoBehaviour
         do
         {
             columnUpdated = false;
-
-            // Start from row 1 and move upwards to the top
-            for (int row = 1; row < _drinkGrid.GetLength(0); row++)
+            
+            for (int row = 1; row < _drinkGrid.GetLength(1); row++)
             {
-                var currentCell = _drinkGrid[row, columnIndex];
-
-                // If the current cell has a drink, check if it can slide down
+                var currentCell = _drinkGrid[columnIndex, row];
                 if (!currentCell.IsTileAvailable(DrinkLayer))
                 {
                     var drinkTile = currentCell.GetTile(DrinkLayer);
-
-                    // Slide the drink down to the nearest available cell below
                     for (int belowRow = row - 1; belowRow >= 0; belowRow--)
                     {
-                        var belowCell = _drinkGrid[belowRow, columnIndex];
+                        var belowCell = _drinkGrid[columnIndex, belowRow];
 
                         if (belowCell.IsTileAvailable(DrinkLayer))
                         {
-                            // Move the tile down to the available cell
                             currentCell.SetTileNull(DrinkLayer);
                             belowCell.SetTile(drinkTile);
-
-                            // Animate the movement downwards
                             drinkTile.Move(belowCell.transform, null);
-
-                            // Mark that the column was updated
                             columnUpdated = true;
-                            break; // Stop after moving to the nearest available cell
+                            break;
                         }
                     }
                 }
             }
 
-        } while (columnUpdated); // Repeat until no further moves are possible in the column
+        } while (columnUpdated);
     }
 }

@@ -11,6 +11,7 @@ using TweenType = Tweeners.TweenType;
 
 public class Waitress : BaseTile, ITappable
 {
+    [SerializeField] private Collider collider;
     [SerializeField] private WaitressTweener tweener;
 
     private WaitressSlot _targetSlot;
@@ -37,6 +38,7 @@ public class Waitress : BaseTile, ITappable
     {
         if (GameController.Instance.IsInputAcceptable())
         {
+            collider.enabled = false;
             if (GameController.Instance.TryFindPath(this, out List<Cell> path))
             {
                 OnSuccessfulInput?.Invoke(this);
@@ -55,7 +57,7 @@ public class Waitress : BaseTile, ITappable
         
         foreach (var target in path)
         {
-            Vector3 targetPosition = target.transform.position; //@todo: maybe a function to get world pos of cells
+            Vector3 targetPosition = target.GetWorldPosition();
             sequence.AppendCallback(() =>
             {
                 tweener.TweenWaitress(this, targetPosition, TweenType.Grid);

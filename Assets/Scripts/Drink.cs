@@ -13,7 +13,7 @@ public class Drink : BaseTile
     
     public override void Move(Transform target, Action onComplete = null)
     {
-        transform.DOMove(target.position, moveDuration).SetEase(moveCurve).OnComplete(() =>
+        transform.DOMove(target.position + Vector3.up, moveDuration).SetEase(moveCurve).OnComplete(() =>
         {
             onComplete?.Invoke();
         });

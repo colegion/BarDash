@@ -45,45 +45,39 @@ namespace GoalSystem
             foreach (var cell in cellsToCheck)
             {
                 var drink = cell.GetTile(_drinkLayer);
-        
-                // Skip if there is no drink in this cell
                 if (drink == null) continue;
 
                 var color = drink.GetTileColor();
-                var slot = TryGetAvailableSlot(color);
+                var slot = TryGetMatchingSlot(color);
         
                 if (slot != null)
                 {
                     matchFound = true;
 
-                    // Trigger the match and move the drink
-                    slot.AppendDrinks((Drink)drink);
-                    drink.Move(slot.GetTarget(), () =>
+                    if (slot.AppendDrinks((Drink)drink))
                     {
-                        cell.SetTileNull(_drinkLayer);
-                        drinkController.UpdateColumn(cell.X);
-
-                        // After updating column, check for matches again
-                        _isCheckingMatches = false;
-                        if (slot.HasCompleted())
+                        drink.Move(slot.GetTarget(), () =>
                         {
-                            var waitress = slot.GetWaitressRef();
-                            slot.ResetSelf();
-                            waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
-                        }
-                    });
-
-                    // Exit the loop to wait for the match animation to finish before re-checking
-                    break;
+                            cell.SetTileNull(_drinkLayer);
+                            drinkController.UpdateColumn(cell.X);
+                            
+                            _isCheckingMatches = false;
+                            slot.IncrementReachedDrinkCount();
+                            if (slot.HasCompleted())
+                            {
+                                var waitress = slot.GetWaitressRef();
+                                slot.ResetSelf();
+                                waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
+                            }
+                        });
+                    }
                 }
             }
-
-            // End the recursive checking if no matches were found in this iteration
             if (!matchFound) _isCheckingMatches = false;
         }
 
 
-        private WaitressSlot TryGetAvailableSlot(GameColors targetColor)
+        private WaitressSlot TryGetMatchingSlot(GameColors targetColor)
         {
             return slots.Find(s => !s.IsAvailable() && s.GetWaitressRef().GetTileColor() == targetColor);
         }
