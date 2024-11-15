@@ -12,6 +12,12 @@ public class TestPrefab : MonoBehaviour, IPoolable
     public void OnCreatedForPool()
     {
         Debug.Log("CreatedForPool");
+        gameObject.SetActive(false);
+    }
+
+    public void OnDeletePool()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void OnReleasePool()

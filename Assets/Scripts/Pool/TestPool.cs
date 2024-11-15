@@ -7,7 +7,7 @@ public class TestPool : MonoBehaviour
     public TestPrefab test;
     void Start()
     {
-        PoolManager.Instance.CreatePool("Test", test, 3);
+        PoolManager.Instance.CreatePool("Test", test, 3, transform);
         PoolManager.Instance.DebugPool();
         for (int i = 0; i < 4; i++)
         {

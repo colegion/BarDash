@@ -54,6 +54,16 @@ namespace Helpers
                     parentCell.SetTile(tempTile);
                 }
             }
+            //Works with PoolManager!!
+            //  for (int i = 0; i < PoolManager.Instance.GetPool<BaseTile>("Drink").Count; i++)
+            // {
+            //     PoolManager.Instance.GetPool<BaseTile>("Drink").ElementAt(i).ConfigureSelf(tiles[i]);
+            //     var parentCell = GetCell(tiles[i]);
+            //     if (parentCell != null)
+            //     {
+            //         parentCell.SetTile(PoolManager.Instance.GetPool<BaseTile>("Drink").ElementAt(i));
+            //     }
+            // }
 
             return _cells;
         }

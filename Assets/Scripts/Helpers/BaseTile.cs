@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Helpers
 {
-    public class BaseTile : MonoBehaviour, IMovable
+    public class BaseTile : MonoBehaviour, IMovable, IPoolable
     {
         [SerializeField] private MeshRenderer cloakMesh;
         [SerializeField] private MeshRenderer tileRenderer;
@@ -31,23 +31,23 @@ namespace Helpers
             SelCloakMesh();
             tileRenderer.material.color = Utilities.GetColor(_tileColor);
         }
-        
+
         private void SetTransform()
         {
             transform.SetParent(GameController.Instance.GetParentByType(_tileArea));
             transform.localPosition = new Vector3(_x, 0, _y);
         }
-        
+
         private void SelCloakMesh()
         {
             cloakMesh.enabled = _elementType == TileElementType.Cloak;
         }
-    
+
         public void SetParentCell(Cell parent)
         {
             _parentCell = parent;
         }
-        
+
         public void DisableElement()
         {
             cloakMesh.enabled = false;
@@ -57,7 +57,7 @@ namespace Helpers
         {
             return _elementType != TileElementType.Null;
         }
-    
+
         public int GetLayer()
         {
             return _layer;
@@ -74,6 +74,27 @@ namespace Helpers
         }
 
         public virtual void Move(Transform target, Action onComplete = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCreatedForPool()
+        {
+            Debug.Log("HHA");
+            
+        }
+
+        public void OnAssignPool()
+        {
+            
+        }
+
+        public void OnReleasePool()
+        {
+            
+        }
+
+        public void OnDeletePool()
         {
             throw new NotImplementedException();
         }
