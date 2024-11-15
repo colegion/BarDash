@@ -6,6 +6,7 @@ namespace Helpers
 {
     public class BaseTile : MonoBehaviour, IMovable
     {
+        [SerializeField] private MeshRenderer cloakMesh;
         [SerializeField] private MeshRenderer tileRenderer;
         private int _x;
         private int _y;
@@ -13,6 +14,7 @@ namespace Helpers
         private Cell _parentCell;
         private ItemType _tileArea;
         private GameColors _tileColor;
+        private TileElementType _elementType;
 
         public int X => _x;
         public int Y => _y;
@@ -23,8 +25,10 @@ namespace Helpers
             _y = data.yCoord;
             _tileArea = (ItemType)data.tileType;
             _tileColor = (GameColors)data.tileColor;
+            _elementType = (TileElementType)data.elementType;
             _layer = data.layer;
             SetTransform();
+            SelCloakMesh();
             tileRenderer.material.color = Utilities.GetColor(_tileColor);
         }
         
@@ -33,10 +37,25 @@ namespace Helpers
             transform.SetParent(GameController.Instance.GetParentByType(_tileArea));
             transform.localPosition = new Vector3(_x, 0, _y);
         }
+        
+        private void SelCloakMesh()
+        {
+            cloakMesh.enabled = _elementType == TileElementType.Cloak;
+        }
     
         public void SetParentCell(Cell parent)
         {
             _parentCell = parent;
+        }
+        
+        public void DisableElement()
+        {
+            cloakMesh.enabled = false;
+        }
+
+        public bool IsElementTile()
+        {
+            return _elementType != TileElementType.Null;
         }
     
         public int GetLayer()

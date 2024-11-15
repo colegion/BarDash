@@ -79,7 +79,6 @@ public class GameController : MonoBehaviour
 
    public bool TryFindPath(BaseTile tile, out List<Cell> travelPath)
    {
-      //@todo: function incomplete. 
       List<Cell> cellsToTravel = new List<Cell>();
       bool pathFound = false;
       var listToCheck = _grid[tile.GetItemType()];
@@ -117,10 +116,29 @@ public class GameController : MonoBehaviour
       travelPath = cellsToTravel;
       if (pathFound)
       {
+         TryDisableCloaks(listToCheck, tile);
          listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
       }
       
       return pathFound;
+   }
+
+   private void TryDisableCloaks(Cell[,] grid, BaseTile tile)
+   {
+      for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
+      {
+         var vector = Utilities.Vectors[(Direction)i];
+         var neighbor = new Vector2Int(tile.X + vector.x, tile.Y + vector.y);
+         if (IsCoordinateValid(grid, neighbor.x, neighbor.y))
+         {
+            var cell = grid[neighbor.x, neighbor.y];
+            var neighborTile = cell.GetTile(_waitressLayer);
+            if (neighborTile != null && neighborTile.IsElementTile())
+            {
+               neighborTile.DisableElement();
+            }
+         }
+      }
    }
 
    private bool IsPathFound(Cell[,] grid, int y)

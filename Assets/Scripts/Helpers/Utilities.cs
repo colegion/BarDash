@@ -59,6 +59,13 @@ namespace Helpers
         Brown,
         Pink
     }
+
+    public enum TileElementType
+    {
+        Null,
+        Cloak,
+        Tip
+    }
     
     public enum Direction
     {
@@ -93,6 +100,7 @@ namespace Helpers
         public int layer;
         public int tileType;
         public int tileColor;
+        public int elementType;
     }
 
     [Serializable]
