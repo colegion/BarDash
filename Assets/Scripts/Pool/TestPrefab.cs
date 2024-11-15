@@ -9,7 +9,7 @@ public class TestPrefab : MonoBehaviour, IPoolable
         Debug.Log("Assigned");
     }
 
-    public void OnCretaedForPool()
+    public void OnCreatedForPool()
     {
         Debug.Log("CreatedForPool");
     }

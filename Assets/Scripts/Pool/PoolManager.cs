@@ -10,14 +10,21 @@ public class PoolManager : MonoBehaviour
     private Dictionary<string, Queue<UnityEngine.Object>> _pools = new Dictionary<string, Queue<UnityEngine.Object>>();
     private Dictionary<string, Object> _prefabPools = new Dictionary<string, Object>();
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+    }
     public Queue<T> CreatePool<T>(string poolName, T poolObject, int amount) where T : UnityEngine.Object, IPoolable
     {
         Queue<T> pool = new Queue<T>();
         for (int i = 0; i < amount; i++)
         {
             pool.Enqueue(Instantiate(poolObject));
-            poolObject.OnCretaedForPool();
+            poolObject.OnCreatedForPool();
         }
         _pools[poolName] = new Queue<UnityEngine.Object>(pool);
         _prefabPools.Add(poolName, poolObject);
