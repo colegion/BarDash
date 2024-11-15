@@ -1,7 +1,7 @@
 
 public interface IPoolable
 {
-    public void OnCretaedForPool();
+    public void OnCreatedForPool();
     public void OnAssignPool();
     public void OnReleasePool();
 
