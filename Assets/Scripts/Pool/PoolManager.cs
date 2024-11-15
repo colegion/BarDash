@@ -10,12 +10,14 @@ public class PoolManager : MonoBehaviour
     private Dictionary<string, Queue<UnityEngine.Object>> _pools = new Dictionary<string, Queue<UnityEngine.Object>>();
     private Dictionary<string, Object> _prefabPools = new Dictionary<string, Object>();
 
-    public Queue<T> CreatePool<T>(string poolName, T poolObject, int amount) where T : UnityEngine.Object
+    private void Awake() => Instance = this;
+    public Queue<T> CreatePool<T>(string poolName, T poolObject, int amount) where T : UnityEngine.Object, IPoolable
     {
         Queue<T> pool = new Queue<T>();
         for (int i = 0; i < amount; i++)
         {
             pool.Enqueue(Instantiate(poolObject));
+            poolObject.OnCretaedForPool();
         }
         _pools[poolName] = new Queue<UnityEngine.Object>(pool);
         _prefabPools.Add(poolName, poolObject);
@@ -30,20 +32,24 @@ public class PoolManager : MonoBehaviour
         }
 
     }
-    private void Awake() => Instance = this;
 
-
-    public T DequeueItemFromPool<T>(string poolName) where T : UnityEngine.Object
+    public T DequeueItemFromPool<T>(string poolName) where T : UnityEngine.Object, IPoolable
     {
+        T pooleable;
         if (_pools.ContainsKey(poolName))
         {
             if (_pools[poolName].TryDequeue(out Object result))
             {
+                pooleable = (T)result;
+                pooleable.OnReleasePool();
                 return (T)result;
             }
             else
             {
-                return Instantiate((T)_prefabPools[poolName]);
+                Object instantiatedObject = Instantiate(_prefabPools[poolName]);
+                pooleable = (T)instantiatedObject;
+                pooleable.OnReleasePool();
+                return (T)instantiatedObject;
             }
 
         }
@@ -54,10 +60,11 @@ public class PoolManager : MonoBehaviour
         }
 
     }
-    public void EnqueueItemToPool<T>(string poolName, T item) where T : UnityEngine.Object
+    public void EnqueueItemToPool<T>(string poolName, T item) where T : UnityEngine.Object, IPoolable
     {
         if (_pools.ContainsKey(poolName))
         {
+            item.OnAssignPool();
             _pools[poolName].Enqueue(item);
         }
         else
