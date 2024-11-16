@@ -47,9 +47,17 @@ public class PoolManager : MonoBehaviour
     {
         _pools.Remove(poolName);
     }
-    public void DeletePool<T>(string poolName)where T:Object,IPoolable
+    public void DeletePool<T>(string poolName) where T : Object, IPoolable
     {
-       //StillProgress!!
+        for (int i = 0; i < _pools[poolName].Count; i++)
+        {
+            T obj = (T)_pools[poolName].ElementAt(i);
+            obj.OnDeletePool();
+            Destroy(obj);
+        }
+        _pools.Remove(poolName);
+
+        //StillProgress!!
     }
     public Queue<T> GetPool<T>(string poolName) where T : UnityEngine.Object, IPoolable
     {
