@@ -46,6 +46,7 @@ public class PoolManager : MonoBehaviour
     public void RemovePool(string poolName)
     {
         _pools.Remove(poolName);
+        _prefabPools.Remove(poolName);
     }
     public void DeletePool<T>(string poolName) where T : Object, IPoolable
     {
@@ -56,8 +57,7 @@ public class PoolManager : MonoBehaviour
             Destroy(obj);
         }
         _pools.Remove(poolName);
-
-        //StillProgress!!
+        _prefabPools.Remove(poolName);
     }
     public Queue<T> GetPool<T>(string poolName) where T : UnityEngine.Object, IPoolable
     {
