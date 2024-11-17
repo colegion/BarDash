@@ -47,7 +47,7 @@ public class Waitress : BaseTile, ITappable
         }
         else
         {
-            //@todo: play some angry emoji.
+            tweener.PlayBlockedEmote();
         }
     }
 
