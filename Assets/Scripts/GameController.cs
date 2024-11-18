@@ -8,7 +8,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public partial class GameController : MonoBehaviour
 {
    [SerializeField] private SlotController slotController;
    [SerializeField] private DrinkController drinkController;
@@ -19,7 +19,13 @@ public class GameController : MonoBehaviour
    private Dictionary<ItemType, Cell[,]> _grid;
    private const int _waitressLayer = 1;
    public static bool EditingLevel => SceneManager.GetActiveScene().name == "LevelEditor";
-   
+
+   #region Level Values
+   private int _levelWaitressCount;
+   private int _levelDrinkCount;
+   private int _completedWaitressCount = 0;
+   private int _completedDrinkCount = 0;
+   #endregion
    public static GameController Instance
    {
       get
@@ -28,11 +34,11 @@ public class GameController : MonoBehaviour
          {
             _instance = FindObjectOfType<GameController>();
          }
-         
+
          return _instance;
       }
    }
-   
+
    private void OnEnable()
    {
       AddListeners();
@@ -47,7 +53,7 @@ public class GameController : MonoBehaviour
    {
       transform.AddComponent<LevelGenerator>();
       _levelGenerator = GetComponent<LevelGenerator>();
-      if(!EditingLevel)
+      if (!EditingLevel)
          LoadLevel();
    }
 
@@ -114,7 +120,7 @@ public class GameController : MonoBehaviour
             break;
          }
       }
-      
+
 
       travelPath = cellsToTravel;
       if (pathFound)
@@ -122,7 +128,7 @@ public class GameController : MonoBehaviour
          TryDisableElements(listToCheck, tile);
          listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
       }
-      
+
       return pathFound;
    }
 
@@ -151,10 +157,10 @@ public class GameController : MonoBehaviour
 
    private bool IsCoordinateValid(Cell[,] grid, int x, int y)
    {
-      return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1) && grid[x,y] != null;
+      return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1) && grid[x, y] != null;
    }
 
-   private bool IsCellAvailable(Cell[,]grid, int x, int y, out Cell cell)
+   private bool IsCellAvailable(Cell[,] grid, int x, int y, out Cell cell)
    {
       var temp = grid[x, y];
       if (temp == null)
@@ -171,7 +177,7 @@ public class GameController : MonoBehaviour
       cell = null;
       return false;
    }
-   
+
    public bool IsInputAcceptable()
    {
       return slotController.IsAvailableSlotExist();
@@ -184,11 +190,63 @@ public class GameController : MonoBehaviour
 
    private void AddListeners()
    {
-      
+
    }
 
    private void RemoveListeners()
    {
-      
+
    }
+   private void CheckLevelCompleteConditionProvided()
+   {
+      if (_levelWaitressCount == _completedWaitressCount)
+      {
+         GameEnd(true);
+      }
+
+   }
+}
+//Events partial class
+public partial class GameController
+{
+   #region Event Delegates
+   public static event Action<Waitress, WaitressSlot> OnWaitressMadeFinalMovement;
+   public static event Action<bool> OnGameEnd;
+   public static event Action<bool> OnSetLevel;
+   #endregion
+
+   #region Event Functions
+   public void WaitressMadeFinalMovement(Waitress waitress, WaitressSlot waitressSlot)
+   {
+      if (OnWaitressMadeFinalMovement != null)
+      {
+         OnWaitressMadeFinalMovement(waitress, waitressSlot);
+         _completedWaitressCount++;
+         _completedDrinkCount += waitressSlot.CurrentDrinkCount;
+         CheckLevelCompleteConditionProvided();
+      }
+
+   }
+   public void GameEnd(bool isWin)
+   {
+      if (OnGameEnd != null)
+      {
+         OnGameEnd(isWin);
+         SetLevel(isWin);
+      }
+
+   }
+   public void SetLevel(bool isNextLevel)
+   {
+      if (OnSetLevel != null)
+      {
+         OnSetLevel(isNextLevel);
+         _completedWaitressCount = 0;
+         _completedDrinkCount = 0;
+      }
+
+   }
+
+   #endregion
+
 }

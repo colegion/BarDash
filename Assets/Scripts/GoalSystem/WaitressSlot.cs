@@ -6,11 +6,20 @@ namespace GoalSystem
     public class WaitressSlot : MonoBehaviour
     {
         [SerializeField] private Transform waitressTarget;
-        private List<Drink> _drinkRefs = new List<Drink>(TargetDrinkCount);     
+        private List<Drink> _drinkRefs = new List<Drink>(TargetDrinkCount);
         private const int TargetDrinkCount = 3;
         private int _currentDrinkCount = 0;
         private Waitress _waitress;
         private bool _clearingSelf;
+
+        public int CurrentDrinkCount
+        {
+            get
+            {
+                return _currentDrinkCount;
+            }
+
+        }
 
         public void SetWaitressRef(Waitress waitress)
         {

@@ -49,7 +49,7 @@ namespace GoalSystem
 
                 var color = drink.GetTileColor();
                 var slot = TryGetMatchingSlot(color);
-        
+
                 if (slot != null)
                 {
                     matchFound = true;
@@ -61,20 +61,40 @@ namespace GoalSystem
                             drink.gameObject.SetActive(false);
                             cell.SetTileNull(_drinkLayer);
                             drinkController.UpdateColumn(cell.X);
-                            
+
                             _isCheckingMatches = false;
                             slot.IncrementReachedDrinkCount();
                             if (slot.HasCompleted())
                             {
                                 var waitress = slot.GetWaitressRef();
+                                GameController.Instance.WaitressMadeFinalMovement(waitress,slot);
                                 slot.ResetSelf();
                                 waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
+                                
                             }
                         });
                     }
                 }
             }
-            if (!matchFound) _isCheckingMatches = false;
+            if (!matchFound)
+            {
+                _isCheckingMatches = false;
+                int currentWaitressCount = 0;
+                for (int i = 0; i < slots.Count; i++)
+                {
+                    if (slots[i].GetWaitressRef() != null)
+                    {
+                        currentWaitressCount++;
+                    }
+                }
+                if (currentWaitressCount == slots.Count)
+                {
+                    GameController.Instance.GameEnd(false);
+                }
+
+            }
+
+
         }
 
 
@@ -82,7 +102,7 @@ namespace GoalSystem
         {
             return slots.Find(s => !s.IsAvailable() && s.GetWaitressRef().GetTileColor() == targetColor);
         }
-        
+
         private WaitressSlot GetAvailableSlot()
         {
             return slots.Find(x => x.IsAvailable());
