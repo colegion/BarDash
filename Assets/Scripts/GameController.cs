@@ -6,6 +6,7 @@ using Helpers;
 using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
    private LevelGenerator _levelGenerator;
    private Dictionary<ItemType, Cell[,]> _grid;
    private const int _waitressLayer = 1;
+   public static bool EditingLevel => SceneManager.GetActiveScene().name == "LevelEditor";
    
    public static GameController Instance
    {
@@ -45,7 +47,8 @@ public class GameController : MonoBehaviour
    {
       transform.AddComponent<LevelGenerator>();
       _levelGenerator = GetComponent<LevelGenerator>();
-      LoadLevel();
+      if(!EditingLevel)
+         LoadLevel();
    }
 
    private void LoadLevel()
@@ -116,14 +119,14 @@ public class GameController : MonoBehaviour
       travelPath = cellsToTravel;
       if (pathFound)
       {
-         TryDisableCloaks(listToCheck, tile);
+         TryDisableElements(listToCheck, tile);
          listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
       }
       
       return pathFound;
    }
 
-   private void TryDisableCloaks(Cell[,] grid, BaseTile tile)
+   private void TryDisableElements(Cell[,] grid, BaseTile tile)
    {
       for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
       {
