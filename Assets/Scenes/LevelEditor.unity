@@ -286,10 +286,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelGenerator: {fileID: 0}
+  saver: {fileID: 0}
   puzzleColumnCount: 0
   puzzleRowCount: 0
   drinkColumnCount: 0
   drinkRowCount: 0
+  levelIndex: 0
 --- !u!1001 &274955473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -498,6 +500,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dca372204bbdc4dbda3d23d61161a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &447829715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447829717}
+  - component: {fileID: 447829716}
+  m_Layer: 0
+  m_Name: LevelSaver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &447829716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447829715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6163e19d55d21364f94e8dbff252dab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &447829717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447829715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &567659228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1118,6 +1164,7 @@ SceneRoots:
   - {fileID: 77736554}
   - {fileID: 143213771}
   - {fileID: 829386344}
+  - {fileID: 447829717}
   - {fileID: 567659228}
   - {fileID: 1940185905}
   - {fileID: 915399325}

@@ -8,10 +8,12 @@ namespace EditorTool
     public class LevelEditor : MonoBehaviour
     {
         public EditorLevelGenerator levelGenerator;
+        public LevelSaver saver;
         public int puzzleColumnCount;
         public int puzzleRowCount;
         public int drinkColumnCount;
         public int drinkRowCount;
+        public int levelIndex;
 
         public List<CellData> PuzzleCells { get; private set; } = new List<CellData>();
         public List<CellData> DrinkCells { get; private set; } = new List<CellData>();
@@ -22,6 +24,7 @@ namespace EditorTool
         private void Start()
         {
             levelGenerator = FindObjectOfType<EditorLevelGenerator>();
+            saver = FindObjectOfType<LevelSaver>();
         }
 
         public void SavePuzzleGrid()
@@ -48,7 +51,6 @@ namespace EditorTool
                 }
             }
 
-            // Initialize the TileDataPerColumn dictionary
             TileDataPerColumn.Clear();
             for (int i = 0; i < drinkColumnCount; i++)
             {
@@ -57,21 +59,6 @@ namespace EditorTool
 
             Debug.Log($"Saved Drink Grid with {DrinkCells.Count} cells.");
         }
-        
-        public void SaveDrinkData()
-        {
-            for (int i = 0; i < drinkColumnCount; i++)
-            {
-                if (!TileDataPerColumn.ContainsKey(i))
-                {
-                    TileDataPerColumn[i] = new List<TileData>();
-                }
-            }
-
-            Debug.Log("Drink data saved! Total columns: " + drinkColumnCount);
-        }
-
-        // Clear the drink data if needed
         public void ClearDrinkData()
         {
             TileDataPerColumn.Clear();
@@ -80,8 +67,12 @@ namespace EditorTool
 
         public void SaveMoveCount()
         {
-            // Logic to save the move count (could involve writing to a file or serializing data)
             Debug.Log($"Move Count Saved: {MoveCount}");
+        }
+
+        public void SaveLevel()
+        {
+            saver.SaveLevel(this);
         }
     }
 }

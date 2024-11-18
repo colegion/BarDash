@@ -38,12 +38,18 @@ namespace EditorTool
 
             EditorGUILayout.Space();
             DrawMoveCountOptions();
+            DrawLevelIndexField();
         
             if (GUILayout.Button("Generate Level"))
             {
                 GenerateLevel();
             }
 
+            EditorGUILayout.Space(100);
+            if (GUILayout.Button("Save Level"))
+            {
+                _editor.SaveLevel();
+            }
             EditorUtility.SetDirty(_editor);
         }
 
@@ -242,8 +248,13 @@ namespace EditorTool
                 _editor.SaveMoveCount();
             }
         }
-    
-        public void GenerateLevel()
+
+        private void DrawLevelIndexField()
+        {
+            _editor.levelIndex = EditorGUILayout.IntField("Level Index", _editor.levelIndex);
+        }
+
+        private void GenerateLevel()
         {
             // Ensure your level generator is ready
             if (_editor.levelGenerator != null)
