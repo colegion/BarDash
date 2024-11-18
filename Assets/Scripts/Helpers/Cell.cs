@@ -46,6 +46,7 @@ namespace Helpers
 
         public bool IsTileAvailable(int layer)
         {
+            if (!_tiles.ContainsKey(layer)) return true;
             return _tiles[layer] == null;
         }
 
