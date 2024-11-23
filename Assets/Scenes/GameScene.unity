@@ -186,6 +186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "g\xFCvenlik \u015Feridi"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b25d737894a70d949a99579699bfdd3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: b25d737894a70d949a99579699bfdd3a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -328,6 +333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bardaklar
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 864a6b53f527d8d4f9e694bb11f0e1b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7051776540269823026, guid: 864a6b53f527d8d4f9e694bb11f0e1b8,
         type: 3}

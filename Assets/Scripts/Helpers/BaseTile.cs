@@ -1,5 +1,6 @@
 using System;
 using Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Helpers
@@ -8,6 +9,7 @@ namespace Helpers
     {
         [SerializeField] private MeshRenderer cloakMesh;
         [SerializeField] private MeshRenderer tileRenderer;
+        [SerializeField] private Material _liquidMat;
         private int _x;
         private int _y;
         private int _layer;
@@ -27,9 +29,22 @@ namespace Helpers
             _tileColor = (GameColors)data.tileColor;
             _elementType = (TileElementType)data.elementType;
             _layer = data.layer;
+
             SetTransform();
             SelCloakMesh();
-            tileRenderer.material.color = Utilities.GetColor(_tileColor);
+            //TEMPORARY MESSY SHITTY CODE
+            if (data.tileType == 1)
+            {
+                cloakMesh.enabled = true;
+                cloakMesh.material.SetColor("_SideColor", Utilities.GetColor(_tileColor));
+                cloakMesh.material.SetColor("_TopColor", Utilities.GetColor(_tileColor));
+            }
+            else
+            {
+                cloakMesh.enabled = false;
+                tileRenderer.material.color = Utilities.GetColor(_tileColor);
+            }
+
         }
 
         private void SetTransform()
@@ -81,17 +96,17 @@ namespace Helpers
         public void OnCreatedForPool()
         {
             Debug.Log("HHA");
-            
+
         }
 
         public void OnAssignPool()
         {
-            
+
         }
 
         public void OnReleasePool()
         {
-            
+
         }
 
         public void OnDeletePool()
