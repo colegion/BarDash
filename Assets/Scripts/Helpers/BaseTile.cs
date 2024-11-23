@@ -7,9 +7,8 @@ namespace Helpers
 {
     public class BaseTile : MonoBehaviour, IMovable, IPoolable
     {
-        [SerializeField] private MeshRenderer cloakMesh;
-        [SerializeField] private MeshRenderer tileRenderer;
-        [SerializeField] private Material _liquidMat;
+        [SerializeField] private Renderer cloakMesh;
+        [SerializeField] private Renderer tileRenderer;
         private int _x;
         private int _y;
         private int _layer;

@@ -13,6 +13,7 @@ public class Waitress : BaseTile, ITappable
 {
     [SerializeField] private Collider collider;
     [SerializeField] private WaitressTweener tweener;
+    [SerializeField] private Animator animator;
 
     private WaitressSlot _targetSlot;
 
@@ -33,7 +34,7 @@ public class Waitress : BaseTile, ITappable
     {
         Move(null);
     }
-    
+
     public override void Move(Transform target, Action onComplete = null)
     {
         if (GameController.Instance.IsInputAcceptable())
@@ -54,7 +55,7 @@ public class Waitress : BaseTile, ITappable
     private void IteratePath(List<Cell> path)
     {
         Sequence sequence = DOTween.Sequence();
-        
+        animator.SetBool("IsWalking", true);
         foreach (var target in path)
         {
             Vector3 targetPosition = target.transform.localPosition + Vector3.up;
@@ -64,12 +65,13 @@ public class Waitress : BaseTile, ITappable
             });
             sequence.AppendInterval(tweener.GetTweenDuration(TweenType.Grid));
         }
-        
+
         sequence.AppendCallback(() =>
         {
             tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
             {
                 OnWaitressReachedTarget?.Invoke();
+                animator.SetBool("IsWalking", false);
             });
         });
     }
@@ -81,7 +83,7 @@ public class Waitress : BaseTile, ITappable
             onComplete?.Invoke();
         });
     }
-    
+
     public void SetTargetSlot(WaitressSlot slot)
     {
         _targetSlot = slot;
