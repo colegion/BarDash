@@ -16,6 +16,8 @@ public class Waitress : BaseTile, ITappable
     [SerializeField] private Animator animator;
 
     private WaitressSlot _targetSlot;
+    private Vector3 _lastPosition;
+    private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     public static event Action<Waitress> OnSuccessfulInput;
     public static event Action OnWaitressReachedTarget;
@@ -28,6 +30,33 @@ public class Waitress : BaseTile, ITappable
     private void OnDisable()
     {
         RemoveListeners();
+    }
+
+    private void Start()
+    {
+        _lastPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        Vector3 currentPosition = transform.position;
+
+        // Check if the position has changed
+        if (currentPosition != _lastPosition)
+        {
+            // Calculate the direction of movement, ignoring the Y-axis
+            Vector3 direction = new Vector3(currentPosition.x - _lastPosition.x, 0f, currentPosition.z - _lastPosition.z).normalized;
+
+            // Update the waitress's rotation to look in the direction of movement
+            if (direction != Vector3.zero) // Avoid rotation if there's no movement
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+            }
+
+            // Update the last position to the current position
+            _lastPosition = currentPosition;
+        }
     }
 
     public void OnTap()
@@ -43,7 +72,8 @@ public class Waitress : BaseTile, ITappable
             if (GameController.Instance.TryFindPath(this, out List<Cell> path))
             {
                 OnSuccessfulInput?.Invoke(this);
-                IteratePath(path);
+                StartCoroutine(MoveRoutine(path));
+                //IteratePath(path);
             }
         }
         else
@@ -52,26 +82,47 @@ public class Waitress : BaseTile, ITappable
         }
     }
 
+    private IEnumerator MoveRoutine(List<Cell> path)
+    {
+        animator.SetBool(IsWalking, true);
+        foreach (var cell in path)
+        {
+            Vector3 targetPosition = cell.GetWorldPosition();
+            tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
+            yield return new WaitForSeconds(tweener.GetTweenDuration(TweenType.Grid));
+        }
+        
+        tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
+        {
+            OnWaitressReachedTarget?.Invoke();
+            animator.SetBool(IsWalking, false);
+        });
+    }
+
     private void IteratePath(List<Cell> path)
     {
         Sequence sequence = DOTween.Sequence();
-        animator.SetBool("IsWalking", true);
+        float delay = tweener.GetTweenDuration(TweenType.Grid);
+        int index = 0;
+        animator.SetBool(IsWalking, true);
         foreach (var target in path)
         {
-            Vector3 targetPosition = target.transform.localPosition + Vector3.up;
-            sequence.AppendCallback(() =>
+            Vector3 targetPosition = target.GetWorldPosition();
+            sequence.Append(transform.DOLookAt(targetPosition, tweener.GetTweenDuration(TweenType.Grid)));
+            sequence.InsertCallback(delay * index, () =>
             {
                 tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
+                index++;
             });
-            sequence.AppendInterval(tweener.GetTweenDuration(TweenType.Grid));
+            
         }
 
-        sequence.AppendCallback(() =>
+        sequence.OnComplete(() =>
         {
             tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
             {
                 OnWaitressReachedTarget?.Invoke();
-                animator.SetBool("IsWalking", false);
+                animator.SetBool(IsWalking, false);
             });
         });
     }

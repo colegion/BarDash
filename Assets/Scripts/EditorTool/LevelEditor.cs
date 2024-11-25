@@ -59,6 +59,7 @@ namespace EditorTool
 
             Debug.Log($"Saved Drink Grid with {DrinkCells.Count} cells.");
         }
+        
         public void ClearDrinkData()
         {
             TileDataPerColumn.Clear();

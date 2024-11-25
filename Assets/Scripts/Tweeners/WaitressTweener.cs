@@ -27,18 +27,24 @@ namespace Tweeners
 
         public void TweenWaitress(Waitress waitress, Vector3 target, TweenType moveType, Action onComplete = null)
         {
+            Sequence sequence = DOTween.Sequence();
             if (moveType == TweenType.Slot)
             {
                 target = waitress.GetTargetSlot().GetTarget().position;
             }
-            var configToUse = _tweenConfigDictionary[moveType];
-            waitress.transform.DOMove(target, configToUse.duration).SetEase(configToUse.curve).OnComplete(() =>
+            else
             {
-                if (moveType == TweenType.Slot || moveType == TweenType.Success)
+                target += Vector3.up;
+            }
+            var configToUse = _tweenConfigDictionary[moveType];
+            sequence.Append(waitress.transform.DOMove(target, configToUse.duration).SetEase(configToUse.curve).OnComplete(
+                () =>
                 {
-                    onComplete?.Invoke();
-                }
-            });
+                    if (moveType == TweenType.Slot || moveType == TweenType.Success)
+                    {
+                        onComplete?.Invoke();
+                    }
+                }));
         }
 
         private bool _emotePlaying; 

@@ -26,6 +26,7 @@ public partial class GameController : MonoBehaviour
    private int _completedWaitressCount = 0;
    private int _completedDrinkCount = 0;
    #endregion
+   
    public static GameController Instance
    {
       get

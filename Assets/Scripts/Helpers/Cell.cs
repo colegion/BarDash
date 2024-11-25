@@ -6,11 +6,9 @@ namespace Helpers
     public class Cell : MonoBehaviour
     {
         public int X { get; private set; }
-
         public int Y { get; private set; }
 
         public ItemType CellArea { get; private set; }
-
         private Dictionary<int, BaseTile> _tiles;
 
         public void ConfigureSelf(CellData data)
@@ -57,7 +55,7 @@ namespace Helpers
 
         public Vector3 GetWorldPosition()
         {
-            return new Vector3(X, 0, Y);
+            return transform.position;
         }
     }
 }
