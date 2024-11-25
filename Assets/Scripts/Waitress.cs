@@ -36,7 +36,7 @@ public class Waitress : BaseTile, ITappable
     private void Start()
     {
         _lastPosition = transform.position;
-        tray.Initialize(3);
+        tray.Initialize(3, -0.73f);
     }
 
     private void Update()
