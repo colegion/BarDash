@@ -8,7 +8,7 @@
     {
       "itemType": 1,
       "width": 3,
-      "height": 5
+      "height": 6
     }
   ],
   "cells": [
@@ -116,7 +116,22 @@
       "xCoord": 2,
       "yCoord": 4,
       "cellType": 1
-    }
+    },
+    {
+              "xCoord": 2,
+              "yCoord": 5,
+              "cellType": 1
+            },
+            {
+                      "xCoord": 1,
+                      "yCoord": 5,
+                      "cellType": 1
+                    },
+                    {
+                                          "xCoord": 0,
+                                          "yCoord": 5,
+                                          "cellType": 1
+                                        }
   ],
   "tiles": [
     {
@@ -286,6 +301,30 @@
       "tileType": 1,
       "elementType": 0,
       "tileColor": 3
-    }
+    },
+    {
+          "xCoord": 2,
+          "yCoord": 5,
+          "layer": 2,
+          "tileType": 1,
+          "elementType": 0,
+          "tileColor": 3
+        },
+        {
+                  "xCoord": 1,
+                  "yCoord": 5,
+                  "layer": 2,
+                  "tileType": 1,
+                  "elementType": 0,
+                  "tileColor": 4
+                },
+                {
+                                  "xCoord": 0,
+                                  "yCoord": 5,
+                                  "layer": 2,
+                                  "tileType": 1,
+                                  "elementType": 0,
+                                  "tileColor": 4
+                                }
   ]
 }
