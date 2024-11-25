@@ -131,6 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloakMesh: {fileID: 3928378633937739062}
   tileRenderer: {fileID: 2612952901993403093}
+  visuals: {fileID: 9222717338732695702}
+  onTrayScale: 0.2
   moveDuration: 0.25
   moveCurve:
     serializedVersion: 2

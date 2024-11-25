@@ -11,6 +11,7 @@ using TweenType = Tweeners.TweenType;
 
 public class Waitress : BaseTile, ITappable
 {
+    [SerializeField] private WaitressTray tray;
     [SerializeField] private Collider collider;
     [SerializeField] private WaitressTweener tweener;
     [SerializeField] private Animator animator;
@@ -35,6 +36,7 @@ public class Waitress : BaseTile, ITappable
     private void Start()
     {
         _lastPosition = transform.position;
+        tray.Initialize(3);
     }
 
     private void Update()
@@ -115,6 +117,16 @@ public class Waitress : BaseTile, ITappable
     public WaitressSlot GetTargetSlot()
     {
         return _targetSlot;
+    }
+
+    public Transform GetTraySlot()
+    {
+        return tray.GiveDrinkTransform();
+    }
+
+    public Transform GetTray()
+    {
+        return tray.transform;
     }
 
     public void ClearTargetSlot()

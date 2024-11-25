@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Drink : BaseTile
 {
+    [SerializeField] private GameObject visuals;
+    [SerializeField] private float onTrayScale;
     [SerializeField] private float moveDuration;
     [SerializeField] private AnimationCurve moveCurve;
     
@@ -17,5 +19,15 @@ public class Drink : BaseTile
         {
             onComplete?.Invoke();
         });
+    }
+
+    public void SetParent(Transform parent)
+    {
+        transform.SetParent(parent);
+    }
+
+    public void SetScale()
+    {
+        visuals.transform.localScale = new Vector3(onTrayScale, onTrayScale, onTrayScale);
     }
 }

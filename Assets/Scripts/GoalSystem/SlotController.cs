@@ -54,9 +54,11 @@ namespace GoalSystem
 
                     if (slot.AppendDrinks((Drink)drink))
                     {
-                        drink.Move(slot.GetTarget(), () =>
+                        var waitress = slot.GetWaitressRef();
+                        drink.Move(waitress.GetTraySlot(), () =>
                         {
-                            drink.gameObject.SetActive(false);
+                            drink.GetComponent<Drink>().SetParent(waitress.GetTray());
+                            drink.GetComponent<Drink>().SetScale();
                             cell.SetTileNull(_drinkLayer);
 
                             slot.IncrementReachedDrinkCount();

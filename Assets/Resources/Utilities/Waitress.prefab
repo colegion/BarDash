@@ -1207,6 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloakMesh: {fileID: 6955826855720174599}
   tileRenderer: {fileID: 8772281623357640659}
+  tray: {fileID: 3261899045982113280}
   collider: {fileID: 5034518525927664353}
   tweener: {fileID: 8718762684763284327}
   animator: {fileID: 64491499588100828}
@@ -1760,6 +1761,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aa923e03750c3344bbb055bcf5971fc, type: 3}
+--- !u!114 &3261899045982113280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3515167198424163598, guid: 3aa923e03750c3344bbb055bcf5971fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2129347303371074318}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0835db6024af9e444b0c6e063b196b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3310859328504080306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3494370083488681148, guid: 3aa923e03750c3344bbb055bcf5971fc,
