@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Helpers;
@@ -26,7 +27,7 @@ public class DrinkController : MonoBehaviour
         return bottomCells;
     }
 
-    public void UpdateColumn(int columnIndex)
+    public void UpdateColumn(int columnIndex, Action onComplete)
     {
         bool columnUpdated;
 
@@ -57,5 +58,7 @@ public class DrinkController : MonoBehaviour
             }
 
         } while (columnUpdated);
+        
+        onComplete?.Invoke();
     }
 }

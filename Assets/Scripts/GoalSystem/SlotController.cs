@@ -34,8 +34,7 @@ namespace GoalSystem
 
         private void CheckMatches()
         {
-            if (_isCheckingMatches) return;
-
+            if (_isCheckingMatches) return; // Prevent duplicate calls.
             _isCheckingMatches = true;
 
             var cellsToCheck = drinkController.GetBottomRow();
@@ -60,36 +59,54 @@ namespace GoalSystem
                             drink.gameObject.SetActive(false);
                             cell.SetTileNull(_drinkLayer);
 
-                            _isCheckingMatches = false;
                             slot.IncrementReachedDrinkCount();
-                            drinkController.UpdateColumn(cell.X);
-                            if (slot.HasCompleted())
+                            drinkController.UpdateColumn(cell.X, () =>
                             {
-                                var waitress = slot.GetWaitressRef();
-                                GameController.Instance.WaitressMadeFinalMovement(waitress,slot);
-                                slot.ResetSelf();
-                                waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
-                            }
+                                if (slot.HasCompleted())
+                                {
+                                    var waitress = slot.GetWaitressRef();
+                                    GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
+                                    slot.ResetSelf();
+                                    waitress.HandleFinalMovement(completedWaitressTarget, () =>
+                                    {
+                                        _isCheckingMatches = false;
+                                        CheckMatches(); // Continue after waitress movement completes.
+                                    });
+                                }
+                                else
+                                {
+                                    _isCheckingMatches = false;
+                                    CheckMatches(); // Retry matches after grid stabilizes.
+                                }
+                            });
                         });
+                        return; // Avoid further checks until this process completes.
                     }
                 }
             }
+
+            // If no matches are found, finalize state.
             if (!matchFound)
             {
                 _isCheckingMatches = false;
-                int currentWaitressCount = 0;
-                for (int i = 0; i < slots.Count; i++)
-                {
-                    if (slots[i].GetWaitressRef() != null)
-                    {
-                        currentWaitressCount++;
-                    }
-                }
-                if (currentWaitressCount == slots.Count)
-                {
-                    GameController.Instance.GameEnd(false);
-                }
+                CheckGameEndCondition();
+            }
+        }
 
+        private void CheckGameEndCondition()
+        {
+            int currentWaitressCount = 0;
+            foreach (var slot in slots)
+            {
+                if (slot.GetWaitressRef() != null)
+                {
+                    currentWaitressCount++;
+                }
+            }
+
+            if (currentWaitressCount == slots.Count)
+            {
+                GameController.Instance.GameEnd(false);
             }
         }
 
