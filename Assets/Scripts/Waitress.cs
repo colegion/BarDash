@@ -99,34 +99,6 @@ public class Waitress : BaseTile, ITappable
         });
     }
 
-    private void IteratePath(List<Cell> path)
-    {
-        Sequence sequence = DOTween.Sequence();
-        float delay = tweener.GetTweenDuration(TweenType.Grid);
-        int index = 0;
-        animator.SetBool(IsWalking, true);
-        foreach (var target in path)
-        {
-            Vector3 targetPosition = target.GetWorldPosition();
-            sequence.Append(transform.DOLookAt(targetPosition, tweener.GetTweenDuration(TweenType.Grid)));
-            sequence.InsertCallback(delay * index, () =>
-            {
-                tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
-                index++;
-            });
-            
-        }
-
-        sequence.OnComplete(() =>
-        {
-            tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
-            {
-                OnWaitressReachedTarget?.Invoke();
-                animator.SetBool(IsWalking, false);
-            });
-        });
-    }
-
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
         tweener.TweenWaitress(this, target.position, TweenType.Success, () =>

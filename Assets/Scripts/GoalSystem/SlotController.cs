@@ -34,7 +34,6 @@ namespace GoalSystem
 
         private void CheckMatches()
         {
-            // Avoid multiple simultaneous checks
             if (_isCheckingMatches) return;
 
             _isCheckingMatches = true;
@@ -60,17 +59,16 @@ namespace GoalSystem
                         {
                             drink.gameObject.SetActive(false);
                             cell.SetTileNull(_drinkLayer);
-                            drinkController.UpdateColumn(cell.X);
 
                             _isCheckingMatches = false;
                             slot.IncrementReachedDrinkCount();
+                            drinkController.UpdateColumn(cell.X);
                             if (slot.HasCompleted())
                             {
                                 var waitress = slot.GetWaitressRef();
                                 GameController.Instance.WaitressMadeFinalMovement(waitress,slot);
                                 slot.ResetSelf();
                                 waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
-                                
                             }
                         });
                     }
@@ -93,8 +91,6 @@ namespace GoalSystem
                 }
 
             }
-
-
         }
 
 
