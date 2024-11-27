@@ -7,7 +7,7 @@ public class WaitressTray : MonoBehaviour
     [SerializeField] private Transform outCircleOfTray;
     [SerializeField] private List<Transform> drinkFieldTransforms = new List<Transform>();
     private int currentDrinkCountOnTray = 0;
-    public void Initialize(int drinkPositionsAmount, float drinkYDistanceFromTray = 0.02f)
+    public void Initialize(int drinkPositionsAmount, float drinkYDistanceFromTray = -0.73f)
     {
         CalculateDrinkPositions(drinkPositionsAmount, drinkYDistanceFromTray);
     }

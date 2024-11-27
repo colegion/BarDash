@@ -13,7 +13,9 @@ namespace Tweeners
         [SerializeField] private float emoteDuration;
         [SerializeField] private List<TweenConfig> tweenConfigs;
 
-        private readonly Dictionary<TweenType, TweenConfig> _tweenConfigDictionary = new Dictionary<TweenType, TweenConfig>();
+        private readonly Dictionary<TweenType, TweenConfig> _tweenConfigDictionary =
+            new Dictionary<TweenType, TweenConfig>();
+
         private void Awake()
         {
             foreach (var config in tweenConfigs)
@@ -36,37 +38,43 @@ namespace Tweeners
             {
                 target += Vector3.up;
             }
+
             var configToUse = _tweenConfigDictionary[moveType];
-            sequence.Append(waitress.transform.DOMove(target, configToUse.duration).SetEase(configToUse.curve).OnComplete(
-                () =>
-                {
-                    if (moveType == TweenType.Slot || moveType == TweenType.Success)
+            sequence.Append(waitress.transform.DOMove(target, configToUse.duration)
+                .SetEase(configToUse.curve)
+                .OnComplete(
+                    () =>
                     {
-                        onComplete?.Invoke();
-                    }
-                }));
+                        if (moveType == TweenType.Slot || moveType == TweenType.Success)
+                        {
+                            onComplete?.Invoke();
+                        }
+                    }));
         }
 
-        private bool _emotePlaying; 
+        private bool _emotePlaying;
+
         public void PlayBlockedEmote()
         {
             if (_emotePlaying) return;
             _emotePlaying = true;
             blockedEmote.gameObject.SetActive(true);
-            blockedEmote.transform.DOPunchScale(new Vector3(emoteScale, emoteScale, emoteScale), emoteDuration).OnComplete(
-                () =>
-                {
-                    blockedEmote.gameObject.SetActive(false);
-                    _emotePlaying = false;
-                });
+            blockedEmote.transform.DOPunchScale(new Vector3(emoteScale, emoteScale, emoteScale), emoteDuration)
+                .OnComplete(
+                    () =>
+                    {
+                        blockedEmote.gameObject.SetActive(false);
+                        _emotePlaying = false;
+                    });
         }
-        
+
         public float GetTweenDuration(TweenType moveType)
         {
             return _tweenConfigDictionary[moveType].duration;
         }
     }
-    
+
+
     [Serializable]
     public class TweenConfig
     {

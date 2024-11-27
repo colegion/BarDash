@@ -93,7 +93,7 @@ public class Waitress : BaseTile, ITappable
             tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
             yield return new WaitForSeconds(tweener.GetTweenDuration(TweenType.Grid));
         }
-        
+
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
         {
             OnWaitressReachedTarget?.Invoke();
@@ -106,6 +106,7 @@ public class Waitress : BaseTile, ITappable
         tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
         {
             onComplete?.Invoke();
+            animator.SetBool(IsWalking, false);
         });
     }
 
