@@ -32,9 +32,62 @@ namespace GoalSystem
 
         private bool _isCheckingMatches;
 
+        private void HandleOnWaitressReachedSlot(Waitress waitress)
+        {
+            var cellsToCheck = drinkController.GetBottomRow();
+
+            foreach (var cell in cellsToCheck)
+            {
+                var drink = cell.GetTile(_drinkLayer);
+                if(drink == null) continue;
+
+                var color = drink.GetTileColor();
+                if (waitress.GetTileColor() == color)
+                {
+                    var slot = GetSlotByWaitressRef(waitress);
+                    if (slot != null)
+                    {
+                        if (slot.AppendDrinks((Drink)drink))
+                        {
+                            drink.Move(waitress.GetTraySlot(), () =>
+                            {
+                                drink.GetComponent<Drink>().SetParent(waitress.GetTray());
+                                drink.GetComponent<Drink>().SetScale();
+                                cell.SetTileNull(_drinkLayer);
+
+                                slot.IncrementReachedDrinkCount();
+                                drinkController.UpdateColumn(cell.X, () =>
+                                {
+                                    if (slot.HasCompleted())
+                                    {
+                                        GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
+                                        slot.ResetSelf();
+                                        waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        private WaitressSlot GetSlotByWaitressRef(Waitress waitress)
+        {
+            foreach (var slot in slots)
+            {
+                if (slot.GetWaitressRef() == waitress)
+                {
+                    return slot;
+                }
+            }
+
+            return null;
+        }
+
         private void CheckMatches()
         {
-            if (_isCheckingMatches) return; // Prevent duplicate calls.
+            if (_isCheckingMatches) return;
             _isCheckingMatches = true;
 
             var cellsToCheck = drinkController.GetBottomRow();
@@ -137,13 +190,13 @@ namespace GoalSystem
         private void AddListeners()
         {
             Waitress.OnSuccessfulInput += HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget += CheckMatches;
+            Waitress.OnWaitressReachedTarget += HandleOnWaitressReachedSlot;
         }
 
         private void RemoveListeners()
         {
             Waitress.OnSuccessfulInput -= HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget -= CheckMatches;
+            Waitress.OnWaitressReachedTarget -= HandleOnWaitressReachedSlot;
         }
     }
 }

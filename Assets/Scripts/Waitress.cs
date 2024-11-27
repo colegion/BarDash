@@ -21,7 +21,7 @@ public class Waitress : BaseTile, ITappable
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     public static event Action<Waitress> OnSuccessfulInput;
-    public static event Action OnWaitressReachedTarget;
+    public static event Action<Waitress> OnWaitressReachedTarget;
 
     private void OnEnable()
     {
@@ -96,7 +96,7 @@ public class Waitress : BaseTile, ITappable
 
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
         {
-            OnWaitressReachedTarget?.Invoke();
+            OnWaitressReachedTarget?.Invoke(this);
             animator.SetBool(IsWalking, false);
         });
     }
