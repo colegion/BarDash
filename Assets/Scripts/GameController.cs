@@ -61,7 +61,7 @@ public partial class GameController : MonoBehaviour
    private void LoadLevel()
    {
       // Load the JSON text file based on level index, or a default file
-      TextAsset levelFile = Resources.Load<TextAsset>("Levels/TestLevel");
+      TextAsset levelFile = Resources.Load<TextAsset>("Levels/Level3");
 
       if (levelFile != null)
       {

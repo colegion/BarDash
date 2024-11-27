@@ -77,6 +77,10 @@ public class Waitress : BaseTile, ITappable
                 StartCoroutine(MoveRoutine(path));
                 //IteratePath(path);
             }
+            else
+            {
+                collider.enabled = true;
+            }
         }
         else
         {

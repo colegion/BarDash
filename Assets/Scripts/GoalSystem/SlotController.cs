@@ -62,7 +62,15 @@ namespace GoalSystem
                                     {
                                         GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
                                         slot.ResetSelf();
-                                        waitress.HandleFinalMovement(completedWaitressTarget, CheckMatches);
+                                        waitress.HandleFinalMovement(completedWaitressTarget, () =>
+                                        {
+                                            CheckMatches();
+                                        });
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("is not completed");
+                                        CheckMatches();
                                     }
                                 });
                             });
@@ -85,7 +93,7 @@ namespace GoalSystem
             return null;
         }
 
-        private void CheckMatches()
+        private void CheckMatches(Waitress refe = null)
         {
             if (_isCheckingMatches) return;
             _isCheckingMatches = true;
@@ -190,13 +198,13 @@ namespace GoalSystem
         private void AddListeners()
         {
             Waitress.OnSuccessfulInput += HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget += HandleOnWaitressReachedSlot;
+            Waitress.OnWaitressReachedTarget += CheckMatches;
         }
 
         private void RemoveListeners()
         {
             Waitress.OnSuccessfulInput -= HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget -= HandleOnWaitressReachedSlot;
+            Waitress.OnWaitressReachedTarget -= CheckMatches;
         }
     }
 }

@@ -78,11 +78,9 @@ namespace EditorTool
                     var tempCell = Object.Instantiate(cellObject, parent);
                     tempCell.ConfigureSelf(new CellData
                     {
-                        xCoord = x,
-                        yCoord = y,
-                        cellType = (int)areaType
+                        xCoord = x, yCoord = y, cellType = (int)areaType
                     });
-                    AppendCells(tempCell);
+                    AppendCells(tempCell, width, height);
                 }
             }
         }
@@ -105,9 +103,9 @@ namespace EditorTool
             }
         }
 
-        private void AppendCells(Cell cell)
+        private void AppendCells(Cell cell, int width, int height)
         {
-            if (!_cells.TryAdd(cell.CellArea, new Cell[8, 8]))
+            if (!_cells.TryAdd(cell.CellArea, new Cell[width, height]))
             {
                 var list = _cells[cell.CellArea];
                 list[cell.X, cell.Y] = cell;
