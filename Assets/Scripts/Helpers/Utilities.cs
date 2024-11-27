@@ -8,7 +8,9 @@ namespace Helpers
     public class Utilities : MonoBehaviour
     {
         [SerializeField] private List<ColorClass> gameColors;
+        [SerializeField] private List<CellMeshType> cellMeshes;
         private static List<ColorClass> _colors;
+        private static List<CellMeshType> _cellMeshes;
         public static Dictionary<Direction, Vector2Int> Vectors = new Dictionary<Direction, Vector2Int>()
         {
             { Direction.Up, Vector2Int.up },
@@ -20,6 +22,7 @@ namespace Helpers
         private void Awake()
         {
             _colors = gameColors;
+            _cellMeshes = cellMeshes;
         }
 
         public static Color GetColor(GameColors colorEnum)
@@ -33,6 +36,33 @@ namespace Helpers
             }
 
             return Color.yellow;
+        }
+
+        public static CellOrientation GetOrientation(int x, int y, ItemType type)
+        {
+            var grid = GameController.Instance.GetGridByType(type);
+            var width = grid.GetLength(0);
+            var height = grid.GetLength(1);
+            
+            if (x < 0 || y < 0 || x >= width || y >= height)
+                throw new ArgumentOutOfRangeException();
+            
+            if (x == 0 && y == 0) return CellOrientation.DownLeft;
+            if (x == 0 && y == height - 1) return CellOrientation.UpLeft;
+            if (x == width - 1 && y == 0) return CellOrientation.DownRight;
+            if (x == width - 1 && y == height - 1) return CellOrientation.UpRight;
+            
+            if (x == 0) return CellOrientation.Left;
+            if (x == width - 1) return CellOrientation.Right;
+            if (y == 0) return CellOrientation.Down;
+            if (y == height - 1) return CellOrientation.Up;
+            
+            return CellOrientation.Middle;
+        }
+
+        public static Mesh GetCellMesh(CellOrientation orientation)
+        {
+            return _cellMeshes.Find(x => x.orientation == orientation).mesh;
         }
     }
 
@@ -72,7 +102,27 @@ namespace Helpers
         Up,
         Right,
         Down,
-        Left
+        Left,
+    }
+
+    public enum CellOrientation
+    {
+        Up,
+        UpRight,
+        Right,
+        DownRight,
+        Middle,
+        Down,
+        DownLeft,
+        Left,
+        UpLeft
+    }
+
+    [Serializable]
+    public class CellMeshType
+    {
+        public CellOrientation orientation;
+        public Mesh mesh;
     }
 
     [Serializable]

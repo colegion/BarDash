@@ -5,6 +5,7 @@ namespace Helpers
 {
     public class Cell : MonoBehaviour
     {
+        [SerializeField] private MeshFilter meshFilter;
         public int X { get; private set; }
         public int Y { get; private set; }
 
@@ -24,6 +25,13 @@ namespace Helpers
         {
             transform.SetParent(GameController.Instance.GetParentByType(CellArea));
             transform.localPosition = new Vector3(X, -1, Y);
+        }
+
+        public void SetMesh()
+        {
+            var orientation = Utilities.GetOrientation(X, Y, CellArea);
+            var mesh = Utilities.GetCellMesh(orientation);
+            meshFilter.mesh = mesh;
         }
 
         public void SetTile(BaseTile baseTile)

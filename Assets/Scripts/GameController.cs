@@ -75,6 +75,7 @@ public partial class GameController : MonoBehaviour
 
             // Set the drink grid to the drink area portion of the generated grid
             drinkController.SetDrinkGrid(_grid[ItemType.DrinkArea]);
+            _levelGenerator.AfterAllCellsInitialized();
          }
          else
          {
@@ -98,7 +99,8 @@ public partial class GameController : MonoBehaviour
       {
          for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
          {
-            var vector = Utilities.Vectors[(Direction)i];
+            var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
+            if(vector == Vector2Int.zero) continue;
             var nextCoord = new Vector2Int(currentCoord.x + vector.x, currentCoord.y + vector.y);
             if (IsCoordinateValid(listToCheck, nextCoord.x, nextCoord.y))
             {
@@ -137,7 +139,8 @@ public partial class GameController : MonoBehaviour
    {
       for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
       {
-         var vector = Utilities.Vectors[(Direction)i];
+         var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
+         if(vector == Vector2Int.zero) continue;
          var neighbor = new Vector2Int(tile.X + vector.x, tile.Y + vector.y);
          if (IsCoordinateValid(grid, neighbor.x, neighbor.y))
          {
@@ -187,6 +190,11 @@ public partial class GameController : MonoBehaviour
    public Transform GetParentByType(ItemType type)
    {
       return type == ItemType.DrinkArea ? drinkParent : waitressParent;
+   }
+
+   public Cell[,] GetGridByType(ItemType type)
+   {
+      return _grid.GetValueOrDefault(type);
    }
 
    private void AddListeners()

@@ -34,9 +34,11 @@ namespace Helpers
             foreach (var cell in levelCells)
             {
                 var parent = GameController.Instance.GetParentByType((ItemType)cell.cellType);
+                var width = _cells[(ItemType)cell.cellType].GetLength(0);
+                var height = _cells[(ItemType)cell.cellType].GetLength(1);
                 var tempCell = Object.Instantiate(cellObject, parent);
                 tempCell.ConfigureSelf(cell);
-                AppendCells(tempCell);
+                AppendCells(tempCell, width, height);
             }
 
             var tiles = levelData.tiles;
@@ -68,9 +70,20 @@ namespace Helpers
             return _cells;
         }
 
-        private void AppendCells(Cell cell)
+        public void AfterAllCellsInitialized()
         {
-            if (!_cells.TryAdd(cell.CellArea, new Cell[8,8]))
+            foreach (var pair in _cells)
+            {
+                foreach (var cell in pair.Value)
+                {
+                    cell.SetMesh();
+                }
+            }
+        }
+
+        private void AppendCells(Cell cell, int width, int height)
+        {
+            if (!_cells.TryAdd(cell.CellArea, new Cell[width, height]))
             {
                 var list = _cells[cell.CellArea];
                 list[cell.X, cell.Y] = cell;

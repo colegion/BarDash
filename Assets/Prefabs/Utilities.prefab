@@ -59,3 +59,22 @@ MonoBehaviour:
     itemColor: {r: 0.3433962, g: 0.24564515, b: 0.11856885, a: 0.88235295}
   - colorEnum: 6
     itemColor: {r: 0.9245283, g: 0.13780695, b: 0.8361653, a: 1}
+  cellMeshes:
+  - orientation: 0
+    mesh: {fileID: -3329902420748629119, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 1
+    mesh: {fileID: -8678823145569952518, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 2
+    mesh: {fileID: -5495902117074765545, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 3
+    mesh: {fileID: 2212009239438826721, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 4
+    mesh: {fileID: 4493585093827132993, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 5
+    mesh: {fileID: -5053925668127403250, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 6
+    mesh: {fileID: -2477511411847689622, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 7
+    mesh: {fileID: -1550514412580984892, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
+  - orientation: 8
+    mesh: {fileID: 8552134717624371188, guid: 13cfab423be59fa4f9ac804a33daceb8, type: 3}
