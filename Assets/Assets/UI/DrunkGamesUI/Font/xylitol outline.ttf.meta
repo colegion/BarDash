@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 441b6c8517e93054c8fe09f3d2d6ad75
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Xylitol
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 309e8b46bd6cec24fad9f4bbd82b10f2, type: 3}
+  - {fileID: 12800000, guid: 81c246be063423a48aec34e603b1d7ec, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
