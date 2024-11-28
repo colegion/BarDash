@@ -38,7 +38,7 @@ namespace GoalSystem
 
         public bool AppendDrinks(Drink drink)
         {
-            if (_drinkRefs.Capacity == _drinkRefs.Count) return false;
+            if (_drinkRefs.Capacity == _drinkRefs.Count || _drinkRefs.Contains(drink)) return false;
             _drinkRefs.Add(drink);
             return true;
         }

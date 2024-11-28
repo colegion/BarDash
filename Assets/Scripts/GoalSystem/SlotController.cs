@@ -51,15 +51,17 @@ namespace GoalSystem
                     {
                         if (slot.AppendDrinks((Drink)drink))
                         {
+                            Debug.Log("i ve been appended");
                             drink.Move(waitress.GetTraySlot(), () =>
                             {
+                                Debug.Log("i ve moved to tray");
                                 drink.GetComponent<Drink>().SetParent(waitress.GetTray());
                                 drink.GetComponent<Drink>().SetScale();
                                 cell.SetTileNull(_drinkLayer);
-
-                                slot.IncrementReachedDrinkCount();
+                                
                                 drinkController.UpdateColumn(cell.X, () =>
                                 {
+                                    slot.IncrementReachedDrinkCount();
                                     if (slot.HasCompleted())
                                     {
                                         GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
