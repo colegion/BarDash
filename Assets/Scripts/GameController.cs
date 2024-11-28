@@ -108,8 +108,8 @@ public partial class GameController : MonoBehaviour
                {
                   currentCoord = nextCoord;
                   cellsToTravel.Add(cell);
-                  break;
                }
+               break;
             }
             else
             {
