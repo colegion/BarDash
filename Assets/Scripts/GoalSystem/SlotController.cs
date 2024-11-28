@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Helpers;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace GoalSystem
 
         private void HandleOnWaitressReachedSlot(Waitress waitress)
         {
+            if (waitress.IsMoving()) return;
             var cellsToCheck = drinkController.GetBottomRow();
 
             foreach (var cell in cellsToCheck)
@@ -62,15 +64,12 @@ namespace GoalSystem
                                     {
                                         GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
                                         slot.ResetSelf();
-                                        waitress.HandleFinalMovement(completedWaitressTarget, () =>
-                                        {
-                                            CheckMatches();
-                                        });
+                                        waitress.HandleFinalMovement(completedWaitressTarget, CheckConsecutiveMatches);
                                     }
                                     else
                                     {
                                         Debug.Log("is not completed");
-                                        CheckMatches();
+                                        CheckConsecutiveMatches();
                                     }
                                 });
                             });
@@ -79,6 +78,44 @@ namespace GoalSystem
                 }
             }
         }
+
+        private List<Waitress> GetReadyWaitresses()
+        {
+            List<Waitress> waitresses = new List<Waitress>();
+            foreach (var slot in slots)
+            {
+                var waitress = slot.GetWaitressRef();
+                if (waitress != null)
+                {
+                    waitresses.Add(waitress);
+                }
+            }
+
+            return waitresses;
+        }
+
+        private void CheckConsecutiveMatches()
+        {
+            StartCoroutine(CheckConsecutiveMatchesCoroutine());
+        }
+
+        private IEnumerator CheckConsecutiveMatchesCoroutine()
+        {
+            var waitresses = GetReadyWaitresses();
+
+            foreach (var waitress in waitresses)
+            {
+                while (waitress.IsMoving()) 
+                {
+                    yield return null;
+                }
+                HandleOnWaitressReachedSlot(waitress);
+
+                // Optionally, introduce a small delay for smoother visuals.
+                yield return new WaitForSeconds(0.25f);
+            }
+        }
+
 
         private WaitressSlot GetSlotByWaitressRef(Waitress waitress)
         {
@@ -91,69 +128,6 @@ namespace GoalSystem
             }
 
             return null;
-        }
-
-        private void CheckMatches(Waitress refe = null)
-        {
-            if (_isCheckingMatches) return;
-            _isCheckingMatches = true;
-
-            var cellsToCheck = drinkController.GetBottomRow();
-            bool matchFound = false;
-
-            foreach (var cell in cellsToCheck)
-            {
-                var drink = cell.GetTile(_drinkLayer);
-                if (drink == null) continue;
-
-                var color = drink.GetTileColor();
-                var slot = TryGetMatchingSlot(color);
-
-                if (slot != null)
-                {
-                    matchFound = true;
-
-                    if (slot.AppendDrinks((Drink)drink))
-                    {
-                        var waitress = slot.GetWaitressRef();
-                        drink.Move(waitress.GetTraySlot(), () =>
-                        {
-                            drink.GetComponent<Drink>().SetParent(waitress.GetTray());
-                            drink.GetComponent<Drink>().SetScale();
-                            cell.SetTileNull(_drinkLayer);
-
-                            slot.IncrementReachedDrinkCount();
-                            drinkController.UpdateColumn(cell.X, () =>
-                            {
-                                if (slot.HasCompleted())
-                                {
-                                    var waitress = slot.GetWaitressRef();
-                                    GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
-                                    slot.ResetSelf();
-                                    waitress.HandleFinalMovement(completedWaitressTarget, () =>
-                                    {
-                                        _isCheckingMatches = false;
-                                        CheckMatches(); // Continue after waitress movement completes.
-                                    });
-                                }
-                                else
-                                {
-                                    _isCheckingMatches = false;
-                                    CheckMatches(); // Retry matches after grid stabilizes.
-                                }
-                            });
-                        });
-                        return; // Avoid further checks until this process completes.
-                    }
-                }
-            }
-
-            // If no matches are found, finalize state.
-            if (!matchFound)
-            {
-                _isCheckingMatches = false;
-                CheckGameEndCondition();
-            }
         }
 
         private void CheckGameEndCondition()
@@ -171,12 +145,6 @@ namespace GoalSystem
             {
                 GameController.Instance.GameEnd(false);
             }
-        }
-
-
-        private WaitressSlot TryGetMatchingSlot(GameColors targetColor)
-        {
-            return slots.Find(s => !s.IsAvailable() && s.GetWaitressRef().GetTileColor() == targetColor);
         }
 
         private WaitressSlot GetAvailableSlot()
@@ -198,13 +166,13 @@ namespace GoalSystem
         private void AddListeners()
         {
             Waitress.OnSuccessfulInput += HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget += CheckMatches;
+            Waitress.OnWaitressReachedTarget += HandleOnWaitressReachedSlot;
         }
 
         private void RemoveListeners()
         {
             Waitress.OnSuccessfulInput -= HandleSuccessfulInput;
-            Waitress.OnWaitressReachedTarget -= CheckMatches;
+            Waitress.OnWaitressReachedTarget -= HandleOnWaitressReachedSlot;
         }
     }
 }

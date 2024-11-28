@@ -16,6 +16,7 @@ public class Waitress : BaseTile, ITappable
     [SerializeField] private WaitressTweener tweener;
     [SerializeField] private Animator animator;
 
+    private bool _isMoving = false;
     private WaitressSlot _targetSlot;
     private Vector3 _lastPosition;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
@@ -42,21 +43,15 @@ public class Waitress : BaseTile, ITappable
     private void Update()
     {
         Vector3 currentPosition = transform.position;
-
-        // Check if the position has changed
         if (currentPosition != _lastPosition)
         {
-            // Calculate the direction of movement, ignoring the Y-axis
             Vector3 direction = new Vector3(currentPosition.x - _lastPosition.x, 0f, currentPosition.z - _lastPosition.z).normalized;
-
-            // Update the waitress's rotation to look in the direction of movement
-            if (direction != Vector3.zero) // Avoid rotation if there's no movement
+            
+            if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
             }
-
-            // Update the last position to the current position
             _lastPosition = currentPosition;
         }
     }
@@ -75,7 +70,6 @@ public class Waitress : BaseTile, ITappable
             {
                 OnSuccessfulInput?.Invoke(this);
                 StartCoroutine(MoveRoutine(path));
-                //IteratePath(path);
             }
             else
             {
@@ -90,6 +84,7 @@ public class Waitress : BaseTile, ITappable
 
     private IEnumerator MoveRoutine(List<Cell> path)
     {
+        _isMoving = true;
         animator.SetBool(IsWalking, true);
         foreach (var cell in path)
         {
@@ -100,6 +95,7 @@ public class Waitress : BaseTile, ITappable
 
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
         {
+            _isMoving = false;
             OnWaitressReachedTarget?.Invoke(this);
             animator.SetBool(IsWalking, false);
         });
@@ -132,6 +128,11 @@ public class Waitress : BaseTile, ITappable
     public Transform GetTray()
     {
         return tray.transform;
+    }
+
+    public bool IsMoving()
+    {
+        return _isMoving;
     }
 
     public void ClearTargetSlot()
