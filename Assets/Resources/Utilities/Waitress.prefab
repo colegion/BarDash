@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6455475914391622279}
   - component: {fileID: 8772281623357640659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stickman_heads_sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0bcdca085445acc4aa21304ffa02deba, type: 2}
+  - {fileID: 2100000, guid: dba219a52e6f3ba4c842f16f609c6051, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1704,17 +1704,17 @@ PrefabInstance:
     - target: {fileID: 3494370083488681148, guid: 3aa923e03750c3344bbb055bcf5971fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.104
+      value: 0.124
       objectReference: {fileID: 0}
     - target: {fileID: 3494370083488681148, guid: 3aa923e03750c3344bbb055bcf5971fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.113
+      value: 0.096
       objectReference: {fileID: 0}
     - target: {fileID: 3494370083488681148, guid: 3aa923e03750c3344bbb055bcf5971fc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.118
+      value: 0.128
       objectReference: {fileID: 0}
     - target: {fileID: 3494370083488681148, guid: 3aa923e03750c3344bbb055bcf5971fc,
         type: 3}
