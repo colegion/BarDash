@@ -46,7 +46,7 @@ public class Waitress : BaseTile, ITappable
         if (currentPosition != _lastPosition)
         {
             Vector3 direction = new Vector3(currentPosition.x - _lastPosition.x, 0f, currentPosition.z - _lastPosition.z).normalized;
-            
+
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -74,11 +74,15 @@ public class Waitress : BaseTile, ITappable
             else
             {
                 collider.enabled = true;
+                EffectController.Instance.PlayEffect("BlockedEmoji", new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Vector3.zero, new Vector3(0.5f, 0.5f, 0.5f));
             }
         }
         else
         {
-            tweener.PlayBlockedEmote();
+            Debug.Log("GIRDIM ANALDAN");
+
+            //I think unnecessary
+            //tweener.PlayBlockedEmote();
         }
     }
 
@@ -103,6 +107,7 @@ public class Waitress : BaseTile, ITappable
 
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
+        EffectController.Instance.PlayEffect("Confetti", tray.transform.position, Vector3.zero, Vector3.one);
         tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
         {
             onComplete?.Invoke();
