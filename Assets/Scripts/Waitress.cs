@@ -135,11 +135,6 @@ public class Waitress : BaseTile, ITappable
         return tray.transform;
     }
 
-    public bool IsMoving()
-    {
-        return _isMoving;
-    }
-
     public void ClearTargetSlot()
     {
         _targetSlot = null;

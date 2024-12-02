@@ -50,7 +50,12 @@ namespace GoalSystem
 
         public bool HasCompleted()
         {
-            return _drinkRefs.Capacity == _drinkRefs.Count && _currentDrinkCount == _drinkRefs.Capacity;
+            if (_drinkRefs.Capacity != _drinkRefs.Count || _currentDrinkCount != _drinkRefs.Capacity) return false;
+            foreach (var drink in _drinkRefs)
+            {
+                if (drink.IsMoving()) return false;
+            }
+            return true;
         }
 
         public Transform GetTarget()

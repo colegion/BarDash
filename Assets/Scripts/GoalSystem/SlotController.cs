@@ -12,6 +12,7 @@ namespace GoalSystem
         [SerializeField] private DrinkController drinkController;
         [SerializeField] private List<WaitressSlot> slots;
 
+        private Coroutine _consecutiveChecking;
         private int _drinkLayer = 2;
 
         private void OnEnable()
@@ -41,7 +42,7 @@ namespace GoalSystem
             foreach (var cell in cellsToCheck)
             {
                 var drink = cell.GetTile(_drinkLayer);
-                if(drink == null) continue;
+                if(drink == null || drink.IsMoving()) continue;
 
                 var color = drink.GetTileColor();
                 if (waitress.GetTileColor() == color)
@@ -51,10 +52,10 @@ namespace GoalSystem
                     {
                         if (slot.AppendDrinks((Drink)drink))
                         {
-                            Debug.Log("i ve been appended");
+                            drink.SetIsMoving(true);
                             drink.Move(waitress.GetTraySlot(), () =>
                             {
-                                Debug.Log("i ve moved to tray");
+                                drink.SetIsMoving(false);
                                 drink.GetComponent<Drink>().SetParent(waitress.GetTray());
                                 drink.GetComponent<Drink>().SetScale();
                                 cell.SetTileNull(_drinkLayer);
@@ -70,7 +71,6 @@ namespace GoalSystem
                                     }
                                     else
                                     {
-                                        Debug.Log("is not completed");
                                         CheckConsecutiveMatches();
                                     }
                                 });
@@ -98,7 +98,8 @@ namespace GoalSystem
 
         private void CheckConsecutiveMatches()
         {
-            StartCoroutine(CheckConsecutiveMatchesCoroutine());
+            //if(_consecutiveChecking == null)
+                _consecutiveChecking = StartCoroutine(CheckConsecutiveMatchesCoroutine());
         }
 
         private IEnumerator CheckConsecutiveMatchesCoroutine()
@@ -112,10 +113,11 @@ namespace GoalSystem
                     yield return null;
                 }
                 HandleOnWaitressReachedSlot(waitress);
-
-                // Optionally, introduce a small delay for smoother visuals.
+                
                 yield return new WaitForSeconds(0.25f);
             }
+
+            _consecutiveChecking = null;
         }
 
 

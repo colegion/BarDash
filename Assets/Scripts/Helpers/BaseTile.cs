@@ -16,7 +16,7 @@ namespace Helpers
         private ItemType _tileArea;
         private GameColors _tileColor;
         private TileElementType _elementType;
-
+        protected bool isMoving;
         public int X => _x;
         public int Y => _y;
 
@@ -67,6 +67,11 @@ namespace Helpers
             cloakMesh.enabled = false;
         }
 
+        public void SetIsMoving(bool move)
+        {
+            isMoving = move;
+        }
+
         public bool IsElementTile()
         {
             return _elementType != TileElementType.Null;
@@ -75,6 +80,11 @@ namespace Helpers
         public int GetLayer()
         {
             return _layer;
+        }
+        
+        public bool IsMoving()
+        {
+            return isMoving;
         }
 
         public ItemType GetItemType()
