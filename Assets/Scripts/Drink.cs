@@ -15,7 +15,7 @@ public class Drink : BaseTile
     
     public override void Move(Transform target, Action onComplete = null)
     {
-        DOVirtual.DelayedCall(0.1f, () =>
+        DOVirtual.DelayedCall(0.15f, () =>
         {
             transform.DOMove(target.position + Vector3.up, moveDuration).SetEase(moveCurve).OnComplete(() =>
             {

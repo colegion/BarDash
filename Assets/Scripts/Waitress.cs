@@ -77,13 +77,6 @@ public class Waitress : BaseTile, ITappable
                 EffectController.Instance.PlayEffect("BlockedEmoji", new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Vector3.zero, new Vector3(0.5f, 0.5f, 0.5f));
             }
         }
-        else
-        {
-            Debug.Log("GIRDIM ANALDAN");
-
-            //I think unnecessary
-            //tweener.PlayBlockedEmote();
-        }
     }
 
     private IEnumerator MoveRoutine(List<Cell> path)
@@ -101,6 +94,7 @@ public class Waitress : BaseTile, ITappable
         {
             _isMoving = false;
             OnWaitressReachedTarget?.Invoke(this);
+            transform.rotation = Quaternion.Euler(Vector3.zero);
             animator.SetBool(IsWalking, false);
         });
     }
@@ -108,7 +102,14 @@ public class Waitress : BaseTile, ITappable
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
         EffectController.Instance.PlayEffect("Confetti", tray.transform.position, Vector3.zero, Vector3.one);
-        tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
+        animator.SetBool(IsWalking, true);
+        /*tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
+        {
+            onComplete?.Invoke();
+            animator.SetBool(IsWalking, false);
+        });*/
+
+        tweener.HandleSuccessMovement(this, target.position, TweenType.Success, () =>
         {
             onComplete?.Invoke();
             animator.SetBool(IsWalking, false);

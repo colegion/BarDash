@@ -45,27 +45,25 @@ namespace Tweeners
                 .OnComplete(
                     () =>
                     {
-                        if (moveType == TweenType.Slot || moveType == TweenType.Success)
+                        if (moveType == TweenType.Slot)
                         {
                             onComplete?.Invoke();
                         }
                     }));
         }
 
-        private bool _emotePlaying;
-
-        public void PlayBlockedEmote()
+        public void HandleSuccessMovement(Waitress waitress, Vector3 target, TweenType moveType, Action onComplete)
         {
-            if (_emotePlaying) return;
-            _emotePlaying = true;
-            blockedEmote.gameObject.SetActive(true);
-            blockedEmote.transform.DOPunchScale(new Vector3(emoteScale, emoteScale, emoteScale), emoteDuration)
-                .OnComplete(
-                    () =>
-                    {
-                        blockedEmote.gameObject.SetActive(false);
-                        _emotePlaying = false;
-                    });
+            Sequence sequence = DOTween.Sequence();
+            var config = _tweenConfigDictionary[moveType];
+            var targetPosition = waitress.transform.position + Vector3.forward;
+            sequence.Append(waitress.transform.DOMove(targetPosition, config.duration).SetEase(config.curve));
+            sequence.Append(waitress.transform.DOMove(target, config.duration).SetEase(config.curve));
+
+            sequence.OnComplete(() =>
+            {
+                onComplete?.Invoke();
+            });
         }
 
         public float GetTweenDuration(TweenType moveType)
