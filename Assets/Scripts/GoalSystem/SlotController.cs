@@ -53,10 +53,10 @@ namespace GoalSystem
                         if (slot.AppendDrinks((Drink)drink))
                         {
                             drink.SetIsMoving(true);
-                            drink.GetComponent<Drink>().SetParent(waitress.GetTray());
                             drink.Move(waitress.GetTraySlot(), () =>
                             {
                                 drink.SetIsMoving(false);
+                                drink.GetComponent<Drink>().SetParent(waitress.GetTray());
                                 drink.GetComponent<Drink>().SetScale();
                                 cell.SetTileNull(_drinkLayer);
                                 

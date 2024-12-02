@@ -90,53 +90,75 @@ public partial class GameController : MonoBehaviour
 
    public bool TryFindPath(BaseTile tile, out List<Cell> travelPath)
    {
-      List<Cell> cellsToTravel = new List<Cell>();
-      bool pathFound = false;
+      travelPath = new List<Cell>();
       var listToCheck = _grid[tile.GetItemType()];
-      var currentCoord = new Vector2Int(tile.X, tile.Y);
+      var startCoord = new Vector2Int(tile.X, tile.Y);
 
-      while (!pathFound)
+      // Queue for BFS, storing the current coordinate and the path to it
+      var queue = new Queue<(Vector2Int coord, List<Cell> path)>();
+      var visited = new HashSet<Vector2Int>();
+      
+      if (startCoord.y == listToCheck.GetLength(1) - 1)
       {
-         for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
-         {
-            var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
-            if(vector == Vector2Int.zero) continue;
-            var nextCoord = new Vector2Int(currentCoord.x + vector.x, currentCoord.y + vector.y);
-            if (IsCoordinateValid(listToCheck, nextCoord.x, nextCoord.y))
-            {
-               if (IsCellAvailable(listToCheck, nextCoord.x, nextCoord.y, out Cell cell))
-               {
-                  currentCoord = nextCoord;
-                  cellsToTravel.Add(cell);
-                  break;
-               }
-               else
-               {
-                  cellsToTravel.Clear();
-               }
-            }
-            else
-            {
-               pathFound = IsPathFound(listToCheck, nextCoord.y);
-               if (pathFound) break;
-            }
-         }
+         // Mark the path as "found" without moving
+         travelPath = new List<Cell>();
+         listToCheck[tile.X, tile.Y].SetTileNull(tile.GetLayer());
+         return true;
+      }
+    
+      // Add the start tile to the queue
+      queue.Enqueue((startCoord, new List<Cell>()));
+      visited.Add(startCoord);
 
-         if (cellsToTravel.Count == 0)
+      while (queue.Count > 0)
+      {
+         var (currentCoord, currentPath) = queue.Dequeue();
+
+         // Get the cell at the current coordinate
+         if (IsCoordinateValid(listToCheck, currentCoord.x, currentCoord.y) &&
+             IsCellAvailable(listToCheck, currentCoord.x, currentCoord.y, tile, out Cell currentCell))
          {
-            break;
+            // Add the current cell to the path
+            currentPath.Add(currentCell);
+
+            if (IsPathFound(listToCheck, currentCoord.y, startCoord.y))
+            {
+               travelPath = currentPath;
+               ClearPathData(tile, currentPath);
+               return true;
+            }
+
+            // Explore neighboring cells
+            for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
+            {
+               var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
+               var nextCoord = new Vector2Int(currentCoord.x + vector.x, currentCoord.y + vector.y);
+
+               if (!visited.Contains(nextCoord) && 
+                   IsCoordinateValid(listToCheck, nextCoord.x, nextCoord.y))
+               {
+                  visited.Add(nextCoord);
+                  var newPath = new List<Cell>(currentPath) { currentCell };
+                  queue.Enqueue((nextCoord, newPath));
+               }
+            }
          }
       }
 
+      // No path found
+      return false;
+   }
+   
+   private void ClearPathData(BaseTile tile, List<Cell> path)
+   {
+      var listToCheck = _grid[tile.GetItemType()];
+      TryDisableElements(listToCheck, tile);
+      listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
 
-      travelPath = cellsToTravel;
-      if (pathFound)
+      foreach (var cell in path)
       {
-         TryDisableElements(listToCheck, tile);
-         listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
+         cell.SetTileNull(_waitressLayer);
       }
-
-      return pathFound;
    }
 
    private void TryDisableElements(Cell[,] grid, BaseTile tile)
@@ -144,7 +166,6 @@ public partial class GameController : MonoBehaviour
       for (int i = 0; i < Enum.GetValues(typeof(Direction)).Length; i++)
       {
          var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
-         if(vector == Vector2Int.zero) continue;
          var neighbor = new Vector2Int(tile.X + vector.x, tile.Y + vector.y);
          if (IsCoordinateValid(grid, neighbor.x, neighbor.y))
          {
@@ -158,9 +179,16 @@ public partial class GameController : MonoBehaviour
       }
    }
 
-   private bool IsPathFound(Cell[,] grid, int y)
+   private bool IsPathFound(Cell[,] grid, int y, int startY)
    {
-      return y >= grid.GetLength(1);
+      // If the starting Y is already in the topmost row
+      if (startY == grid.GetLength(1) - 1)
+      {
+         return true; // Path is already "found" since it's on the topmost row
+      }
+
+      // Otherwise, check if the current Y is in the topmost row
+      return y == grid.GetLength(1) - 1;
    }
 
    private bool IsCoordinateValid(Cell[,] grid, int x, int y)
@@ -168,7 +196,7 @@ public partial class GameController : MonoBehaviour
       return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1) && grid[x, y] != null;
    }
 
-   private bool IsCellAvailable(Cell[,] grid, int x, int y, out Cell cell)
+   private bool IsCellAvailable(Cell[,] grid, int x, int y, BaseTile tile, out Cell cell)
    {
       var temp = grid[x, y];
       if (temp == null)
@@ -180,6 +208,15 @@ public partial class GameController : MonoBehaviour
       {
          cell = temp;
          return true;
+      }
+      else
+      {
+         var tempTile = temp.GetTile(_waitressLayer);
+         if (tile == tempTile)
+         {
+            cell = temp;
+            return true;
+         }
       }
 
       cell = null;

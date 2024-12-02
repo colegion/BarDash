@@ -17,7 +17,12 @@ namespace Helpers
             X = data.xCoord;
             Y = data.yCoord;
             CellArea = (ItemType)data.cellType;
-            _tiles = new Dictionary<int, BaseTile>();
+            _tiles = new Dictionary<int, BaseTile>()
+            {
+                {0, null},
+                {1, null},
+                {2, null},
+            };
             SetTransform();
         }
 
@@ -42,9 +47,11 @@ namespace Helpers
 
         public void SetTileNull(int layer)
         {
-            if (_tiles[layer] != null)
+            if (!_tiles.ContainsKey(layer)) return;
+            
+            var tile = _tiles.GetValueOrDefault(layer);
+            if (tile != null)
             {
-                var tile = _tiles[layer];
                 tile.SetParentCell(null);
                 _tiles[layer] = null;
             }

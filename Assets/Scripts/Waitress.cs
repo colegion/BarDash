@@ -93,9 +93,9 @@ public class Waitress : BaseTile, ITappable
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
         {
             _isMoving = false;
-            OnWaitressReachedTarget?.Invoke(this);
             transform.rotation = Quaternion.Euler(Vector3.zero);
             animator.SetBool(IsWalking, false);
+            OnWaitressReachedTarget?.Invoke(this);
         });
     }
 
