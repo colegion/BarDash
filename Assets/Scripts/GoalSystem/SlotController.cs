@@ -12,7 +12,7 @@ namespace GoalSystem
         [SerializeField] private DrinkController drinkController;
         [SerializeField] private List<WaitressSlot> slots;
 
-        private Coroutine _consecutiveChecking;
+        private bool _isCheckingMatches;
         private int _drinkLayer = 2;
 
         private void OnEnable()
@@ -32,11 +32,11 @@ namespace GoalSystem
             waitress.SetTargetSlot(slot);
         }
 
-        private bool _isCheckingMatches;
 
         private void HandleOnWaitressReachedSlot(Waitress waitress)
         {
             if (waitress.IsMoving()) return;
+            _isCheckingMatches = true;
             var cellsToCheck = drinkController.GetBottomRow();
 
             foreach (var cell in cellsToCheck)
@@ -79,6 +79,8 @@ namespace GoalSystem
                     }
                 }
             }
+            
+            _isCheckingMatches = false;
         }
 
         private List<Waitress> GetReadyWaitresses()
@@ -98,8 +100,7 @@ namespace GoalSystem
 
         private void CheckConsecutiveMatches()
         {
-            //if(_consecutiveChecking == null)
-                _consecutiveChecking = StartCoroutine(CheckConsecutiveMatchesCoroutine());
+            StartCoroutine(CheckConsecutiveMatchesCoroutine());
         }
 
         private IEnumerator CheckConsecutiveMatchesCoroutine()
@@ -116,10 +117,9 @@ namespace GoalSystem
                 
                 yield return new WaitForSeconds(0.25f);
             }
-
-            _consecutiveChecking = null;
+            
+            CheckGameEndCondition();
         }
-
 
         private WaitressSlot GetSlotByWaitressRef(Waitress waitress)
         {
@@ -139,7 +139,8 @@ namespace GoalSystem
             int currentWaitressCount = 0;
             foreach (var slot in slots)
             {
-                if (slot.GetWaitressRef() != null)
+                var waitress = slot.GetWaitressRef();
+                if (waitress != null && !waitress.IsMoving() && !_isCheckingMatches)
                 {
                     currentWaitressCount++;
                 }
