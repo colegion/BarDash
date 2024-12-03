@@ -15,8 +15,6 @@ public class Waitress : BaseTile, ITappable
     [SerializeField] private Collider collider;
     [SerializeField] private WaitressTweener tweener;
     [SerializeField] private Animator animator;
-
-    private bool _isMoving = false;
     private WaitressSlot _targetSlot;
     private Vector3 _lastPosition;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
@@ -81,7 +79,7 @@ public class Waitress : BaseTile, ITappable
 
     private IEnumerator MoveRoutine(List<Cell> path)
     {
-        _isMoving = true;
+        isMoving = true;
         animator.SetBool(IsWalking, true);
         foreach (var cell in path)
         {
@@ -92,7 +90,7 @@ public class Waitress : BaseTile, ITappable
 
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
         {
-            _isMoving = false;
+            isMoving = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
             animator.SetBool(IsWalking, false);
             OnWaitressReachedTarget?.Invoke(this);
