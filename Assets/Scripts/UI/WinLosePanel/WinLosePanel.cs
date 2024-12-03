@@ -35,6 +35,7 @@ namespace UI.WinLosePanel
         private Sprite winEmojiSprite;
 
         [SerializeField] private RawImage failSlotsImage;
+        [SerializeField] private TextMeshProUGUI outOfSpace;
 
         [SerializeField] private Sprite winTextSprite;
         [SerializeField] private Sprite loseTextSprite;
@@ -57,6 +58,7 @@ namespace UI.WinLosePanel
             {
                 failCamera.gameObject.SetActive(false);
                 failSlotsImage.gameObject.SetActive(false);
+                outOfSpace.gameObject.SetActive(false);
                 completeOrLoseLevelText.text = "COMPLETE!";
                 winOrLoseEmoji.sprite = winEmojiSprite;
                 winOrLoseTextImage.sprite = winTextSprite;
@@ -71,6 +73,7 @@ namespace UI.WinLosePanel
                 failCamera.Render();
                 Camera.main.Render();
                 failSlotsImage.gameObject.SetActive(true);
+                outOfSpace.gameObject.SetActive(true);
                 completeOrLoseLevelText.text = "FAILED!";
                 winOrLoseEmoji.sprite = loseEmojiSprite;
                 winOrLoseTextImage.sprite = loseTextSprite;
@@ -80,14 +83,14 @@ namespace UI.WinLosePanel
             }
 
             gameObject.SetActive(true);
-            StartCoroutine(SetPanelOpenAnimation());
+            StartCoroutine(SetPanelOpenAnimation(isWin));
         }
 
         public void ClosePanel()
         {
         }
-
-        private IEnumerator SetPanelOpenAnimation()
+        
+        private IEnumerator SetPanelOpenAnimation(bool isWin)
         {
             canPlay = true;
             upperBadgeRectTransform.anchoredPosition = upperBadgeDissapearPosition;
@@ -102,14 +105,18 @@ namespace UI.WinLosePanel
             levelTextRectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
             completeOrLoseLevelText.rectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
             yield return new WaitForSeconds(0.5f);
-            winOrLoseTextImage.rectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
-            StartCoroutine(PlayShineAnimation());
-            winOrLoseEmoji.rectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
-            yield return new WaitForSeconds(0.5f);
-            shineRectTransform.DOScale(Vector3.one, 0.3f).SetEase(Ease.Flash);
+            winOrLoseTextImage.rectTransform.DOScale(Vector3.one * 1.5f, 0.5f).SetEase(Ease.OutElastic);
+            
+            if (isWin)
+            {
+                StartCoroutine(PlayShineAnimation());
+                winOrLoseEmoji.rectTransform.DOScale(Vector3.one * 2, 0.5f).SetEase(Ease.OutElastic);
+                yield return new WaitForSeconds(0.5f);
+                shineRectTransform.DOScale(Vector3.one * 2, 0.3f).SetEase(Ease.Flash);
+                StartCoroutine(PlayEmojiAnimation());
+            }
+            
             nextOrRestartLevelButtonRectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutElastic);
-           
-            StartCoroutine(PlayEmojiAnimation());
         }
 
         private IEnumerator SetPanelCloseAnimation()

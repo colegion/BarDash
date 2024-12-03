@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4383331685438098254}
   - component: {fileID: 3928378633937739062}
   - component: {fileID: 1604993239489496894}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 8886442539700820047}
   - component: {fileID: 372269833211265557}
   - component: {fileID: 971603125371877861}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DummyCloak
   m_TagString: Untagged
   m_Icon: {fileID: 0}

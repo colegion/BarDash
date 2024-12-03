@@ -287,6 +287,17 @@ public partial class GameController
          SetLevel(false);
       }
    }
+   
+   [ContextMenu("Check win")]
+   public void Win()
+   {
+      if (OnGameEnd != null)
+      {
+         OnGameEnd(true);
+         SetLevel(true);
+      }
+   }
+   
    public void GameEnd(bool isWin)
    {
       if (OnGameEnd != null)
