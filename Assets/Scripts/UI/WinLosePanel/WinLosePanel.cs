@@ -11,6 +11,8 @@ namespace UI.WinLosePanel
 {
     public class WinLosePanel : MonoBehaviour
     {
+        [SerializeField] private Camera failCamera;
+        [SerializeField] private RenderTexture targetTexture;
         [Header("Win Panel Values")] [SerializeField]
         private RectTransform levelTextRectTransform;
 
@@ -32,6 +34,8 @@ namespace UI.WinLosePanel
         [Header("Image Properties")] [SerializeField]
         private Sprite winEmojiSprite;
 
+        [SerializeField] private RawImage failSlotsImage;
+
         [SerializeField] private Sprite winTextSprite;
         [SerializeField] private Sprite loseTextSprite;
         [SerializeField] private Sprite loseEmojiSprite;
@@ -51,6 +55,8 @@ namespace UI.WinLosePanel
             nextOrRestartButton.onClick.RemoveAllListeners();
             if (isWin)
             {
+                failCamera.gameObject.SetActive(false);
+                failSlotsImage.gameObject.SetActive(false);
                 completeOrLoseLevelText.text = "COMPLETE!";
                 winOrLoseEmoji.sprite = winEmojiSprite;
                 winOrLoseTextImage.sprite = winTextSprite;
@@ -60,6 +66,11 @@ namespace UI.WinLosePanel
             }
             else
             {
+                failCamera.gameObject.SetActive(true);
+                failCamera.targetTexture = targetTexture;
+                failCamera.Render();
+                Camera.main.Render();
+                failSlotsImage.gameObject.SetActive(true);
                 completeOrLoseLevelText.text = "FAILED!";
                 winOrLoseEmoji.sprite = loseEmojiSprite;
                 winOrLoseTextImage.sprite = loseTextSprite;

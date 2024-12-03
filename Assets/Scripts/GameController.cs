@@ -277,6 +277,16 @@ public partial class GameController
       }
 
    }
+
+   [ContextMenu("Check fail popup")]
+   public void Fail()
+   {
+      if (OnGameEnd != null)
+      {
+         OnGameEnd(false);
+         SetLevel(false);
+      }
+   }
    public void GameEnd(bool isWin)
    {
       if (OnGameEnd != null)
