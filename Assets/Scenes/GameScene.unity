@@ -5148,12 +5148,12 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 2.9
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 5fbfdc9c0e0ac0e46aa9be37b171c3d3, type: 2}
   m_TargetDisplay: 0
@@ -6089,10 +6089,10 @@ RectTransform:
   - {fileID: 287387582}
   m_Father: {fileID: 720362929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -291}
-  m_SizeDelta: {x: 1242, y: 606}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 8.150024, y: -131.09998}
+  m_SizeDelta: {x: 33.700012, y: 606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &974429874
 MonoBehaviour:
