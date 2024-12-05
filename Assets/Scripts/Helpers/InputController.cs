@@ -1,3 +1,4 @@
+using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
 using Interfaces;
@@ -29,7 +30,7 @@ namespace Helpers
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
             {
                 var isValid = TryGetTappable(out ITappable tappable);
 
@@ -60,6 +61,10 @@ namespace Helpers
                 }
             }
             return false;
+        }
+        private bool IsMouseOverUI()
+        {
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
 

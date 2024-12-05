@@ -35,7 +35,7 @@ namespace UI.WinLosePanel
         private Sprite winEmojiSprite;
 
         [SerializeField] private RawImage failSlotsImage;
-        [SerializeField] private TextMeshProUGUI outOfSpace;
+        [SerializeField] private GameObject outOfSpace;
 
         [SerializeField] private Sprite winTextSprite;
         [SerializeField] private Sprite loseTextSprite;
