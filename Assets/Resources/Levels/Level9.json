@@ -1,0 +1,1265 @@
+{
+    "areaGridSizes": [
+        {
+            "itemType": 0,
+            "width": 5,
+            "height": 5
+        },
+        {
+            "itemType": 1,
+            "width": 3,
+            "height": 30
+        }
+    ],
+    "cells": [
+        {
+            "xCoord": 0,
+            "yCoord": 0,
+            "cellType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 1,
+            "cellType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 2,
+            "cellType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 3,
+            "cellType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 4,
+            "cellType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 0,
+            "cellType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 1,
+            "cellType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 2,
+            "cellType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 3,
+            "cellType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 4,
+            "cellType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 0,
+            "cellType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 1,
+            "cellType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 2,
+            "cellType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 3,
+            "cellType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 4,
+            "cellType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 0,
+            "cellType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 1,
+            "cellType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 2,
+            "cellType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 3,
+            "cellType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 4,
+            "cellType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 0,
+            "cellType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 1,
+            "cellType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 2,
+            "cellType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 3,
+            "cellType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 4,
+            "cellType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 0,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 1,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 2,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 3,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 4,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 5,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 6,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 7,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 8,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 9,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 10,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 11,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 12,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 13,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 14,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 15,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 16,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 17,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 18,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 19,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 20,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 21,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 22,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 23,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 24,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 25,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 26,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 27,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 28,
+            "cellType": 1
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 29,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 0,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 1,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 2,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 3,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 4,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 5,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 6,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 7,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 8,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 9,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 10,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 11,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 12,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 13,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 14,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 15,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 16,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 17,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 18,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 19,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 20,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 21,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 22,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 23,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 24,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 25,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 26,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 27,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 28,
+            "cellType": 1
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 29,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 0,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 1,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 2,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 3,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 4,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 5,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 6,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 7,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 8,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 9,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 10,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 11,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 12,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 13,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 14,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 15,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 16,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 17,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 18,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 19,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 20,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 21,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 22,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 23,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 24,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 25,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 26,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 27,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 28,
+            "cellType": 1
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 29,
+            "cellType": 1
+        }
+    ],
+    "tiles": [
+        {
+            "xCoord": 0,
+            "yCoord": 0,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 1,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 2,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 3,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 4,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 5,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 6,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 7,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 8,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 9,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 10,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 11,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 12,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 13,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 14,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 15,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 16,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 17,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 18,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 19,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 20,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 0,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 1,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 2,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 3,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 4,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 5,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 6,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 7,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 8,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 9,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 10,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 11,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 12,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 13,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 14,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 15,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 16,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 17,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 18,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 19,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 20,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 0,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 1,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 2,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 3,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 4,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 5,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 6,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 7,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 8,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 9,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 10,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 11,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 12,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 13,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 14,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 15,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 16,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 17,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 18,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 19,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 20,
+            "layer": 2,
+            "tileType": 1,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 1,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 1,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 1,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 1,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 2,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 2,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 2,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 2,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 2,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 3,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 3,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 3,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 3,
+            "elementType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 3,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 0,
+            "yCoord": 4,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 4,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 4,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 4,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 4,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 4,
+            "yCoord": 4,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 2,
+            "elementType": 0
+        },
+        {
+            "xCoord": 1,
+            "yCoord": 0,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 6,
+            "elementType": 0
+        },
+        {
+            "xCoord": 2,
+            "yCoord": 0,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 1,
+            "elementType": 0
+        },
+        {
+            "xCoord": 3,
+            "yCoord": 0,
+            "layer": 1,
+            "tileType": 0,
+            "tileColor": 3,
+            "elementType": 0
+        }
+    ]
+}
