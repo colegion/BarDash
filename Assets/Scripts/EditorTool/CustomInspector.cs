@@ -37,9 +37,8 @@ namespace EditorTool
             }
 
             EditorGUILayout.Space();
-            DrawMoveCountOptions();
             DrawLevelIndexField();
-        
+
             if (GUILayout.Button("Generate Level"))
             {
                 GenerateLevel();
@@ -50,6 +49,7 @@ namespace EditorTool
             {
                 _editor.SaveLevel();
             }
+
             EditorUtility.SetDirty(_editor);
         }
 
@@ -93,9 +93,11 @@ namespace EditorTool
             for (int j = 0; j < _editor.WaitressTiles.Count; j++)
             {
                 EditorGUILayout.LabelField($"Waitress Tile {j + 1}", EditorStyles.boldLabel);
-                _editor.WaitressTiles[j].xCoord = EditorGUILayout.IntSlider("X Coord", _editor.WaitressTiles[j].xCoord, 0,
+                _editor.WaitressTiles[j].xCoord = EditorGUILayout.IntSlider("X Coord", _editor.WaitressTiles[j].xCoord,
+                    0,
                     _editor.puzzleColumnCount - 1);
-                _editor.WaitressTiles[j].yCoord = EditorGUILayout.IntSlider("Y Coord", _editor.WaitressTiles[j].yCoord, 0,
+                _editor.WaitressTiles[j].yCoord = EditorGUILayout.IntSlider("Y Coord", _editor.WaitressTiles[j].yCoord,
+                    0,
                     _editor.puzzleRowCount - 1);
                 _editor.WaitressTiles[j].tileColor =
                     (int)(GameColors)EditorGUILayout.EnumPopup("Color", (GameColors)_editor.WaitressTiles[j].tileColor);
@@ -150,15 +152,14 @@ namespace EditorTool
                 {
                     EditorGUILayout.LabelField($"Tile {j + 1}", EditorStyles.boldLabel);
 
-                    // Update tile properties
+                    // Automatically set the Y coordinate to the current index
                     tileList[j].xCoord = i; // Fixed column for the tile
-                    tileList[j].yCoord = EditorGUILayout.IntField("Y Coord", tileList[j].yCoord);
+                    tileList[j].yCoord = j; // Set Y coordinate to the index in the list
 
-                    // Ensure proper enum casting for color
+                    // Display tile properties
                     tileList[j].tileColor =
                         (int)(GameColors)EditorGUILayout.EnumPopup("Color", (GameColors)tileList[j].tileColor);
 
-                    // Ensure proper enum casting for element type
                     tileList[j].elementType =
                         (int)(TileElementType)EditorGUILayout.EnumPopup("Element Type",
                             (TileElementType)tileList[j].elementType);
@@ -176,10 +177,10 @@ namespace EditorTool
                 // Button to add a new drink
                 if (GUILayout.Button("Add Drink"))
                 {
-                    _editor.TileDataPerColumn[i].Add(new TileData
+                    tileList.Add(new TileData
                     {
                         xCoord = i,
-                        yCoord = 0,
+                        yCoord = tileList.Count, // Set Y coordinate to the new tile's index
                         layer = 2,
                         tileType = 1, // Assuming 1 represents the 'Drink' type
                         tileColor = (int)GameColors.White,
@@ -189,13 +190,15 @@ namespace EditorTool
 
                 EditorGUILayout.Space();
             }
-        
+
             if (GUILayout.Button("Save Drink Data"))
             {
                 SaveDrinkData();
             }
+
             EditorUtility.SetDirty(_editor);
         }
+
 
         private void SaveDrinkData()
         {
@@ -217,9 +220,9 @@ namespace EditorTool
                     // Update the tile data here if necessary (e.g., if user edited any tile properties)
                     tileList[j] = new TileData
                     {
-                        xCoord = i,  // Fixed x coordinate for the column
-                        yCoord = tileList[j].yCoord,  // Preserve the y coordinate
-                        layer = tileList[j].layer,    // Preserve the layer
+                        xCoord = i, // Fixed x coordinate for the column
+                        yCoord = tileList[j].yCoord, // Preserve the y coordinate
+                        layer = tileList[j].layer, // Preserve the layer
                         tileType = tileList[j].tileType, // Preserve the tile type
                         tileColor = tileList[j].tileColor, // Preserve the tile color
                         elementType = tileList[j].elementType // Preserve the element type
@@ -237,17 +240,6 @@ namespace EditorTool
             EditorUtility.SetDirty(_editor);
         }
 
-
-
-        private void DrawMoveCountOptions()
-        {
-            EditorGUILayout.LabelField("Move Count Options", EditorStyles.boldLabel);
-            _editor.MoveCount = EditorGUILayout.IntField("Move Count", _editor.MoveCount);
-            if (GUILayout.Button("Save Move Count"))
-            {
-                _editor.SaveMoveCount();
-            }
-        }
 
         private void DrawLevelIndexField()
         {

@@ -67,6 +67,8 @@ public class Waitress : BaseTile, ITappable
             if (GameController.Instance.TryFindPath(this, out List<Cell> path))
             {
                 OnSuccessfulInput?.Invoke(this);
+                if(path.Count > 0)
+                    path.RemoveAt(0);
                 StartCoroutine(MoveRoutine(path));
             }
             else
