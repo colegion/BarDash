@@ -37,6 +37,12 @@ public class Waitress : BaseTile, ITappable
         _lastPosition = transform.position;
         tray.Initialize(3, -0.73f);
     }
+    
+    public override void SetTransform()
+    {
+        transform.SetParent(GameController.Instance.GetParentByType(TileArea));
+        transform.localPosition = new Vector3(X, -.8f, Y);
+    }
 
     private void Update()
     {
@@ -101,7 +107,10 @@ public class Waitress : BaseTile, ITappable
 
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
-        EffectController.Instance.PlayEffect("Confetti", tray.transform.position, Vector3.zero, Vector3.one);
+        DOVirtual.DelayedCall(0.15f, ()=>
+        {
+            EffectController.Instance.PlayEffect("Confetti", tray.transform.position, Vector3.zero, Vector3.one);
+        });
         animator.SetBool(IsWalking, true);
         /*tweener.TweenWaitress(this, target.position, TweenType.Success, () =>
         {

@@ -13,7 +13,7 @@ namespace Helpers
         private int _y;
         private int _layer;
         private Cell _parentCell;
-        private ItemType _tileArea;
+        protected ItemType TileArea;
         private GameColors _tileColor;
         private TileElementType _elementType;
         protected bool isMoving;
@@ -24,7 +24,7 @@ namespace Helpers
         {
             _x = data.xCoord;
             _y = data.yCoord;
-            _tileArea = (ItemType)data.tileType;
+            TileArea = (ItemType)data.tileType;
             _tileColor = (GameColors)data.tileColor;
             _elementType = (TileElementType)data.elementType;
             _layer = data.layer;
@@ -46,9 +46,9 @@ namespace Helpers
 
         }
 
-        private void SetTransform()
+        public virtual void SetTransform()
         {
-            transform.SetParent(GameController.Instance.GetParentByType(_tileArea));
+            transform.SetParent(GameController.Instance.GetParentByType(TileArea));
             transform.localPosition = new Vector3(_x, 0, _y);
         }
 
@@ -89,7 +89,7 @@ namespace Helpers
 
         public ItemType GetItemType()
         {
-            return _tileArea;
+            return TileArea;
         }
 
         public GameColors GetTileColor()
