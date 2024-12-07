@@ -31,11 +31,8 @@ public class InGameUI : MonoBehaviour
     }
     private void GameController_OnSetLevel(bool isWin)
     {
-        var index = PlayerPrefs.GetInt("LevelIndex", 1);
-        var cycleCount = PlayerPrefs.GetInt("CycleCount", 0);
         levelTextObject.SetActive(true);
         settingsButton.gameObject.SetActive(true);
-        levelText.text = $"Level: {cycleCount * 10 + index}";
     }
     private void OnDisable()
     {

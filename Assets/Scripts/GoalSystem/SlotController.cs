@@ -33,8 +33,6 @@ namespace GoalSystem
         }
 
 
-        private int _activeProcesses = 0;
-
         private void HandleOnWaitressReachedSlot(Waitress waitress)
         {
             if (waitress.IsMoving()) return;
@@ -54,7 +52,6 @@ namespace GoalSystem
                     {
                         if (slot.AppendDrinks((Drink)drink))
                         {
-                            _activeProcesses++;
                             drink.SetIsMoving(true);
                             drink.Move(waitress.GetTraySlot(), () =>
                             {
@@ -74,13 +71,11 @@ namespace GoalSystem
                                         {
                                             GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
                                             CheckConsecutiveMatches();
-                                            _activeProcesses--;
                                         });
                                     }
                                     else
                                     {
                                         CheckConsecutiveMatches();
-                                        _activeProcesses--;
                                     }
                                 });
                             });
@@ -89,9 +84,7 @@ namespace GoalSystem
                 }
             }
             
-            if(_activeProcesses == 0)
-                _isCheckingMatches = false;
-            CheckGameEndCondition();
+            _isCheckingMatches = false;
         }
 
         private List<Waitress> GetReadyWaitresses()
@@ -128,6 +121,8 @@ namespace GoalSystem
                 
                 yield return new WaitForSeconds(0.25f);
             }
+            
+            CheckGameEndCondition();
         }
 
         private WaitressSlot GetSlotByWaitressRef(Waitress waitress)
@@ -145,7 +140,6 @@ namespace GoalSystem
 
         private void CheckGameEndCondition()
         {
-            if (_isCheckingMatches) return;
             int currentWaitressCount = 0;
             foreach (var slot in slots)
             {
