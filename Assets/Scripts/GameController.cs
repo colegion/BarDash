@@ -90,11 +90,16 @@ public partial class GameController : MonoBehaviour
    private void LoadLevel()
    {
       int levelIndex = PlayerPrefs.GetInt("LevelIndex", 1);
+      var cycleCount = PlayerPrefs.GetInt("CycleCount", 0);
       if (levelIndex > 10)
       {
+         cycleCount++;
          levelIndex = 1;
          PlayerPrefs.SetInt("LevelIndex", levelIndex);
+         PlayerPrefs.SetInt("CycleCount", cycleCount);
       }
+
+      if (OnSetLevel != null) OnSetLevel(true);
       TextAsset levelFile = Resources.Load<TextAsset>($"Levels/Level{levelIndex}");
 
       if (levelFile != null)
@@ -340,7 +345,7 @@ public partial class GameController
          if (isWin)
          {
             var index = PlayerPrefs.GetInt("LevelIndex", 1);
-            PlayerPrefs.SetInt("LevelIndex", index+1);
+            PlayerPrefs.SetInt("LevelIndex", index + 1);
          }
          OnGameEnd(isWin);
          SetLevel(isWin);
@@ -355,9 +360,7 @@ public partial class GameController
          _completedWaitressCount = 0;
          _completedDrinkCount = 0;
       }
-
    }
 
    #endregion
-
 }
