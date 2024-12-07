@@ -65,9 +65,13 @@ namespace GoalSystem
                                     slot.IncrementReachedDrinkCount();
                                     if (slot.HasCompleted())
                                     {
-                                        GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
+                                        
                                         slot.ResetSelf();
-                                        waitress.HandleFinalMovement(completedWaitressTarget, CheckConsecutiveMatches);
+                                        waitress.HandleFinalMovement(completedWaitressTarget, () =>
+                                        {
+                                            CheckConsecutiveMatches();
+                                            GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
+                                        });
                                     }
                                     else
                                     {

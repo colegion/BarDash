@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace UI.WinLosePanel
@@ -163,6 +164,7 @@ namespace UI.WinLosePanel
             StopCoroutine(PlayEmojiAnimation());
             StopCoroutine(PlayShineAnimation());
             StartCoroutine(SetPanelCloseAnimation());
+            SceneManager.LoadScene("GameScene");
         }
 
         private void RestartLevel()
@@ -172,6 +174,7 @@ namespace UI.WinLosePanel
             StopCoroutine(PlayEmojiAnimation());
             StopCoroutine(PlayShineAnimation());
             StartCoroutine(SetPanelCloseAnimation());
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

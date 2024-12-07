@@ -17,7 +17,7 @@ public partial class GameController : MonoBehaviour
    private static GameController _instance;
    private LevelGenerator _levelGenerator;
    private Dictionary<ItemType, Cell[,]> _grid;
-   private const int _waitressLayer = 1;
+   private const int WaitressLayer = 1;
    public static bool EditingLevel => SceneManager.GetActiveScene().name == "LevelEditor";
 
    #region Level Values
@@ -55,13 +55,46 @@ public partial class GameController : MonoBehaviour
       transform.AddComponent<LevelGenerator>();
       _levelGenerator = GetComponent<LevelGenerator>();
       if (!EditingLevel)
+      {
          LoadLevel();
+         CalculateLevelWaitressCount();
+         CalculateLevelDrinkCount();
+      }
+   }
+
+   private void CalculateLevelWaitressCount()
+   {
+      var waitressGrid = _grid[ItemType.WaitressArea];
+      foreach (var cell in waitressGrid)
+      {
+         if (cell.GetTile(WaitressLayer) != null)
+         {
+            _levelWaitressCount++;
+         }
+      }
+   }
+   
+   private void CalculateLevelDrinkCount()
+   {
+      var drinkGrid = _grid[ItemType.DrinkArea];
+      foreach (var cell in drinkGrid)
+      {
+         if (cell.GetTile(2) != null)
+         {
+            _levelDrinkCount++;
+         }
+      }
    }
 
    private void LoadLevel()
    {
-      // Load the JSON text file based on level index, or a default file
-      TextAsset levelFile = Resources.Load<TextAsset>("Levels/Level4");
+      int levelIndex = PlayerPrefs.GetInt("LevelIndex", 1);
+      if (levelIndex > 10)
+      {
+         levelIndex = 1;
+         PlayerPrefs.SetInt("LevelIndex", levelIndex);
+      }
+      TextAsset levelFile = Resources.Load<TextAsset>($"Levels/Level{levelIndex}");
 
       if (levelFile != null)
       {
@@ -153,11 +186,11 @@ public partial class GameController : MonoBehaviour
    {
       var listToCheck = _grid[tile.GetItemType()];
       TryDisableElements(listToCheck, tile);
-      listToCheck[tile.X, tile.Y].SetTileNull(_waitressLayer);
+      listToCheck[tile.X, tile.Y].SetTileNull(WaitressLayer);
 
       foreach (var cell in path)
       {
-         cell.SetTileNull(_waitressLayer);
+         cell.SetTileNull(WaitressLayer);
       }
    }
 
@@ -170,7 +203,7 @@ public partial class GameController : MonoBehaviour
          if (IsCoordinateValid(grid, neighbor.x, neighbor.y))
          {
             var cell = grid[neighbor.x, neighbor.y];
-            var neighborTile = cell.GetTile(_waitressLayer);
+            var neighborTile = cell.GetTile(WaitressLayer);
             if (neighborTile != null && neighborTile.IsElementTile())
             {
                neighborTile.DisableElement();
@@ -204,14 +237,14 @@ public partial class GameController : MonoBehaviour
          cell = null;
          return false;
       }
-      if (temp.IsTileAvailable(_waitressLayer))
+      if (temp.IsTileAvailable(WaitressLayer))
       {
          cell = temp;
          return true;
       }
       else
       {
-         var tempTile = temp.GetTile(_waitressLayer);
+         var tempTile = temp.GetTile(WaitressLayer);
          if (tile == tempTile)
          {
             cell = temp;
@@ -302,6 +335,11 @@ public partial class GameController
    {
       if (OnGameEnd != null)
       {
+         if (isWin)
+         {
+            var index = PlayerPrefs.GetInt("LevelIndex", 1);
+            PlayerPrefs.SetInt("LevelIndex", index+1);
+         }
          OnGameEnd(isWin);
          SetLevel(isWin);
       }
