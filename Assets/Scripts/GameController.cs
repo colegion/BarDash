@@ -59,6 +59,7 @@ public partial class GameController : MonoBehaviour
          LoadLevel();
          CalculateLevelWaitressCount();
          CalculateLevelDrinkCount();
+         Debug.Log("level waitress count : " + _levelWaitressCount);
       }
    }
 
@@ -282,6 +283,7 @@ public partial class GameController : MonoBehaviour
    }
    private void CheckLevelCompleteConditionProvided()
    {
+      Debug.Log($"level waitress count {_levelWaitressCount} and completed count {_completedWaitressCount}:");
       if (_levelWaitressCount == _completedWaitressCount)
       {
          GameEnd(true);
@@ -301,13 +303,13 @@ public partial class GameController
    #region Event Functions
    public void WaitressMadeFinalMovement(Waitress waitress, WaitressSlot waitressSlot)
    {
-      if (OnWaitressMadeFinalMovement != null)
-      {
-         OnWaitressMadeFinalMovement(waitress, waitressSlot);
+      //if (OnWaitressMadeFinalMovement != null)
+      //{
+        // OnWaitressMadeFinalMovement(waitress, waitressSlot);
          _completedWaitressCount++;
          _completedDrinkCount += waitressSlot.CurrentDrinkCount;
          CheckLevelCompleteConditionProvided();
-      }
+      //}
 
    }
 

@@ -69,8 +69,8 @@ namespace GoalSystem
                                         slot.ResetSelf();
                                         waitress.HandleFinalMovement(completedWaitressTarget, () =>
                                         {
-                                            CheckConsecutiveMatches();
                                             GameController.Instance.WaitressMadeFinalMovement(waitress, slot);
+                                            CheckConsecutiveMatches();
                                         });
                                     }
                                     else
