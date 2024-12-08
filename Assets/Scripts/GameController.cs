@@ -95,7 +95,7 @@ public partial class GameController : MonoBehaviour
          levelIndex = 1;
          PlayerPrefs.SetInt("LevelIndex", levelIndex);
       }
-      TextAsset levelFile = Resources.Load<TextAsset>($"Levels/Level{levelIndex}");
+      TextAsset levelFile = Resources.Load<TextAsset>($"Levels/Level8");
 
       if (levelFile != null)
       {

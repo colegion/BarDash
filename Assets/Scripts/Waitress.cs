@@ -18,6 +18,7 @@ public class Waitress : BaseTile, ITappable
     private WaitressSlot _targetSlot;
     private Vector3 _lastPosition;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+    private bool _waitingProcess;
 
     public static event Action<Waitress> OnSuccessfulInput;
     public static event Action<Waitress> OnWaitressReachedTarget;
@@ -133,6 +134,16 @@ public class Waitress : BaseTile, ITappable
     public WaitressSlot GetTargetSlot()
     {
         return _targetSlot;
+    }
+
+    public void SetProcess(bool value)
+    {
+        _waitingProcess = value;
+    }
+
+    public bool IsWaitingProcess()
+    {
+        return _waitingProcess;
     }
 
     public Transform GetTraySlot()
