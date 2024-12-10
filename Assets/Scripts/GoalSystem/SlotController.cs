@@ -91,6 +91,8 @@ namespace GoalSystem
             
             //if(!matchPossible && !AnyWaitressWaitingProcess())
               //  CheckGameEndCondition();
+              if(_processCount == 0)
+                  CheckGameEndCondition();
         }
 
         private List<Waitress> GetReadyWaitresses()
