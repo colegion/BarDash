@@ -89,8 +89,8 @@ namespace GoalSystem
             
             waitress.SetProcess(false);
             
-            if(!matchPossible && !AnyWaitressWaitingProcess())
-                CheckGameEndCondition();
+            //if(!matchPossible && !AnyWaitressWaitingProcess())
+              //  CheckGameEndCondition();
         }
 
         private List<Waitress> GetReadyWaitresses()
@@ -124,10 +124,12 @@ namespace GoalSystem
             StartCoroutine(CheckConsecutiveMatchesCoroutine());
         }
 
+
+        private int _processCount = 0;
         private IEnumerator CheckConsecutiveMatchesCoroutine()
         {
             var waitresses = GetReadyWaitresses();
-
+            _processCount++;
             foreach (var waitress in waitresses)
             {
                 while (waitress.IsMoving()) 
@@ -138,9 +140,14 @@ namespace GoalSystem
                 waitress.SetProcess(true);
                 HandleOnWaitressReachedSlot(waitress);
                 
-                //yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(0.15f);
             }
+
+            _processCount--;
             
+            if(_processCount == 0)
+                CheckGameEndCondition();
+
             //CheckGameEndCondition();
         }
 
@@ -184,8 +191,8 @@ namespace GoalSystem
 
         private IEnumerator WaitAndCheckForFail()
         {
-            yield return new WaitForSeconds(1f);
-            if(GetFilledWaitressCount() == slots.Count)
+            yield return new WaitForSeconds(2f);
+            if(GetFilledWaitressCount() == slots.Count && !AnyWaitressWaitingProcess())
                 GameController.Instance.GameEnd(false);
         }
         
