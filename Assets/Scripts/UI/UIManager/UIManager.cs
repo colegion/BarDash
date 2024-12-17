@@ -20,18 +20,23 @@ namespace UI.UIManager
 
         #endregion
 
-        [Header("UI Elements")] [SerializeField]
+        [Header("UI Elements")]
+        [SerializeField]
         private WinLosePanel.WinLosePanel winLosePanel;
+        [SerializeField] private IngameUI.InGameUI ingameUI;
 
         private void Awake()
         {
             if (_instance == null)
             {
                 _instance = this;
+                DontDestroyOnLoad(this);
+                DontDestroyOnLoad(winLosePanel.failCamera.gameObject);
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
+                Destroy(winLosePanel.failCamera.gameObject);
             }
         }
 
@@ -44,10 +49,12 @@ namespace UI.UIManager
         private void GameController_OnGameEnd(bool isWin)
         {
             winLosePanel.OpenPanel(isWin);
+            ingameUI.ClosePanelCompletely();
         }
 
         private void GameController_OnSetLevel(bool isNextLevel)
         {
+            ingameUI.OpenPanelCompletely();
         }
 
         private void OnDisable()

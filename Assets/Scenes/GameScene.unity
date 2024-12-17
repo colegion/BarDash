@@ -4071,6 +4071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winLosePanel: {fileID: 720362932}
+  ingameUI: {fileID: 1763766825}
 --- !u!1 &636554112
 GameObject:
   m_ObjectHideFlags: 0

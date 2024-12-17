@@ -26,7 +26,7 @@ public partial class GameController : MonoBehaviour
    private int _completedWaitressCount = 0;
    private int _completedDrinkCount = 0;
    #endregion
-   
+
    public static GameController Instance
    {
       get
@@ -74,7 +74,7 @@ public partial class GameController : MonoBehaviour
          }
       }
    }
-   
+
    private void CalculateLevelDrinkCount()
    {
       var drinkGrid = _grid[ItemType.DrinkArea];
@@ -131,7 +131,7 @@ public partial class GameController : MonoBehaviour
       // Queue for BFS, storing the current coordinate and the path to it
       var queue = new Queue<(Vector2Int coord, List<Cell> path)>();
       var visited = new HashSet<Vector2Int>();
-      
+
       if (startCoord.y == listToCheck.GetLength(1) - 1)
       {
          // Mark the path as "found" without moving
@@ -139,7 +139,7 @@ public partial class GameController : MonoBehaviour
          listToCheck[tile.X, tile.Y].SetTileNull(tile.GetLayer());
          return true;
       }
-    
+
       // Add the start tile to the queue
       queue.Enqueue((startCoord, new List<Cell>()));
       visited.Add(startCoord);
@@ -168,7 +168,7 @@ public partial class GameController : MonoBehaviour
                var vector = Utilities.Vectors.GetValueOrDefault((Direction)i);
                var nextCoord = new Vector2Int(currentCoord.x + vector.x, currentCoord.y + vector.y);
 
-               if (!visited.Contains(nextCoord) && 
+               if (!visited.Contains(nextCoord) &&
                    IsCoordinateValid(listToCheck, nextCoord.x, nextCoord.y))
                {
                   visited.Add(nextCoord);
@@ -182,7 +182,7 @@ public partial class GameController : MonoBehaviour
       // No path found
       return false;
    }
-   
+
    private void ClearPathData(BaseTile tile, List<Cell> path)
    {
       var listToCheck = _grid[tile.GetItemType()];
@@ -305,45 +305,43 @@ public partial class GameController
    {
       //if (OnWaitressMadeFinalMovement != null)
       //{
-        // OnWaitressMadeFinalMovement(waitress, waitressSlot);
-         _completedWaitressCount++;
-         _completedDrinkCount += waitressSlot.CurrentDrinkCount;
-         CheckLevelCompleteConditionProvided();
+      // OnWaitressMadeFinalMovement(waitress, waitressSlot);
+      _completedWaitressCount++;
+      _completedDrinkCount += waitressSlot.CurrentDrinkCount;
+      CheckLevelCompleteConditionProvided();
       //}
 
    }
 
-   [ContextMenu("Check fail popup")]
-   public void Fail()
+   // [ContextMenu("Check fail popup")]
+   // public void Fail()
+   // {
+   //    if (OnGameEnd != null)
+   //    {
+   //       OnGameEnd(false);
+   //       SetLevel(false);
+   //    }
+   // }
+
+   // [ContextMenu("Check win")]
+   // public void Win()
+   // {
+   //    if (OnGameEnd != null)
+   //    {
+   //       OnGameEnd(true);
+   //       SetLevel(true);
+   //    }
+   // }
+   public int GetCurrentLevelIndex()
    {
-      if (OnGameEnd != null)
-      {
-         OnGameEnd(false);
-         SetLevel(false);
-      }
+      return PlayerPrefs.GetInt("LevelIndex", 1);
    }
-   
-   [ContextMenu("Check win")]
-   public void Win()
-   {
-      if (OnGameEnd != null)
-      {
-         OnGameEnd(true);
-         SetLevel(true);
-      }
-   }
-   
    public void GameEnd(bool isWin)
    {
       if (OnGameEnd != null)
       {
-         if (isWin)
-         {
-            var index = PlayerPrefs.GetInt("LevelIndex", 1);
-            PlayerPrefs.SetInt("LevelIndex", index+1);
-         }
          OnGameEnd(isWin);
-         SetLevel(isWin);
+         //SetLevel(isWin, index);
       }
 
    }
@@ -351,6 +349,11 @@ public partial class GameController
    {
       if (OnSetLevel != null)
       {
+         var index = PlayerPrefs.GetInt("LevelIndex", 1);
+         if (isNextLevel)
+         {
+            PlayerPrefs.SetInt("LevelIndex", index + 1);
+         }
          OnSetLevel(isNextLevel);
          _completedWaitressCount = 0;
          _completedDrinkCount = 0;

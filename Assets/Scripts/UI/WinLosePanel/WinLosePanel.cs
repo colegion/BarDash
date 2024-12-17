@@ -12,7 +12,7 @@ namespace UI.WinLosePanel
 {
     public class WinLosePanel : MonoBehaviour
     {
-        [SerializeField] private Camera failCamera;
+        public Camera failCamera;
         [SerializeField] private RenderTexture targetTexture;
         [Header("Win Panel Values")] [SerializeField]
         private RectTransform levelTextRectTransform;
@@ -134,6 +134,7 @@ namespace UI.WinLosePanel
             nextOrRestartLevelButtonRectTransform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.OutCubic);
             yield return new WaitForSeconds(0.2f);
             gameObject.SetActive(false);
+             SceneManager.LoadScene("GameScene");
         }
 
         private IEnumerator PlayEmojiAnimation()
@@ -163,8 +164,8 @@ namespace UI.WinLosePanel
             DOTween.Kill(this);
             StopCoroutine(PlayEmojiAnimation());
             StopCoroutine(PlayShineAnimation());
-            StartCoroutine(SetPanelCloseAnimation());
-            SceneManager.LoadScene("GameScene");
+            StartCoroutine(SetPanelCloseAnimation());          
+            GameController.Instance.SetLevel(true);
         }
 
         private void RestartLevel()
@@ -174,7 +175,7 @@ namespace UI.WinLosePanel
             StopCoroutine(PlayEmojiAnimation());
             StopCoroutine(PlayShineAnimation());
             StartCoroutine(SetPanelCloseAnimation());
-            SceneManager.LoadScene("GameScene");
+            GameController.Instance.SetLevel(false);
         }
     }
 }

@@ -90,11 +90,18 @@ public class Waitress : BaseTile, ITappable
     {
         isMoving = true;
         animator.SetBool(IsWalking, true);
+        Debug.Log(path.Count+"PATH COUNT");
         foreach (var cell in path)
         {
             Vector3 targetPosition = cell.GetWorldPosition();
-            tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
-            yield return new WaitForSeconds(tweener.GetTweenDuration(TweenType.Grid));
+            //tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
+            //yield return new WaitForSeconds(tweener.GetTweenDuration(TweenType.Grid));
+            while(transform.position!=targetPosition)
+            {
+                transform.position=Vector3.MoveTowards(transform.position,targetPosition,5f*Time.deltaTime);
+                yield return new WaitForEndOfFrame();
+            }
+         
         }
 
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
