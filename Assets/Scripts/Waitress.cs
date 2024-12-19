@@ -38,7 +38,7 @@ public class Waitress : BaseTile, ITappable
         _lastPosition = transform.position;
         tray.Initialize(3, -0.73f);
     }
-    
+
     public override void SetTransform()
     {
         transform.SetParent(GameController.Instance.GetParentByType(TileArea));
@@ -74,7 +74,7 @@ public class Waitress : BaseTile, ITappable
             if (GameController.Instance.TryFindPath(this, out List<Cell> path))
             {
                 OnSuccessfulInput?.Invoke(this);
-                if(path.Count > 0)
+                if (path.Count > 0)
                     path.RemoveAt(0);
                 StartCoroutine(MoveRoutine(path));
             }
@@ -90,18 +90,19 @@ public class Waitress : BaseTile, ITappable
     {
         isMoving = true;
         animator.SetBool(IsWalking, true);
-        Debug.Log(path.Count+"PATH COUNT");
+        Debug.Log(path.Count + "PATH COUNT");
+        Effect smokeEffect = EffectController.Instance.PlayEffectAndSetParent("Smoke", new Vector3(0,0.18f,0), transform, Quaternion.Euler(0, -180, 0), Vector3.one);
         foreach (var cell in path)
         {
             Vector3 targetPosition = cell.GetWorldPosition();
             //tweener.TweenWaitress(this, targetPosition, TweenType.Grid);
             //yield return new WaitForSeconds(tweener.GetTweenDuration(TweenType.Grid));
-            while(transform.position!=targetPosition)
+            while (transform.position != targetPosition)
             {
-                transform.position=Vector3.MoveTowards(transform.position,targetPosition,5f*Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, 5f * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
-         
+
         }
 
         tweener.TweenWaitress(this, transform.position, TweenType.Slot, () =>
@@ -109,13 +110,14 @@ public class Waitress : BaseTile, ITappable
             isMoving = false;
             transform.rotation = Quaternion.Euler(Vector3.zero);
             animator.SetBool(IsWalking, false);
+            EffectController.Instance.StopEffect(smokeEffect);
             OnWaitressReachedTarget?.Invoke(this);
         });
     }
 
     public void HandleFinalMovement(Transform target, Action onComplete)
     {
-        DOVirtual.DelayedCall(0.15f, ()=>
+        DOVirtual.DelayedCall(0.15f, () =>
         {
             EffectController.Instance.PlayEffect("Confetti", tray.transform.position, Vector3.zero, Vector3.one);
         });

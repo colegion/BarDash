@@ -16,7 +16,7 @@ public class Drink : BaseTile
     public override void SetTransform()
     {
         transform.SetParent(GameController.Instance.GetParentByType(TileArea));
-        transform.localPosition = new Vector3(X, 0, Y);
+        transform.localPosition = new Vector3(X, -0.329f, Y);
     }
     
     public override void Move(Transform target, Action onComplete = null)
@@ -27,6 +27,13 @@ public class Drink : BaseTile
             {
                 onComplete?.Invoke();
             });
+        });
+    }
+    public override void Move(Vector3 targetVector)
+    {
+        DOVirtual.DelayedCall(0.15f, () =>
+        {
+            transform.DOMove(targetVector , moveDuration).SetEase(moveCurve);
         });
     }
 

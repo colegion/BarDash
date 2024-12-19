@@ -49,7 +49,7 @@ public class DrinkController : MonoBehaviour
                         {
                             currentCell.SetTileNull(DrinkLayer);
                             belowCell.SetTile(drinkTile);
-                            drinkTile.Move(belowCell.transform, null);
+                            drinkTile.Move(new Vector3(belowCell.transform.position.x,-0.329f,belowCell.transform.position.z));
                             columnUpdated = true;
                             break;
                         }

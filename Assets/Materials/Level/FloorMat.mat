@@ -21,45 +21,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FloorMat
-  m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - N_F_ESSAO_ON
-  - N_F_SS_ON
-  - N_F_TRANSAFFSHA_ON
+  - DR_SPECULAR_ON
+  - _CELPRIMARYMODE_SINGLE
+  - _EMISSION
+  - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords:
   - DR_ENABLE_LIGHTMAP_DIR
-  - DR_SPECULAR_ON
-  - N_F_TRANSAFFSHA
-  - _CELPRIMARYMODE_SINGLE
-  - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
-  - _GIFLATSHADE_OFF
-  - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
-  - _LIGHTAFFECTOUTLINECOLOR_OFF
-  - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
-  - _LIGHTAFFECTSHADOW_OFF
-  - _LIGHTFALLOFFAFFECTSHADOWT_OFF
-  - _LIGIGNOYNORDIR_OFF
-  - _MCIALO_OFF
-  - _MIXMAINTEXTOOUTLINE_OFF
-  - _MVCOL_OFF
-  - _OUTLINEWIDTHAFFECTEDBYVIEWDISTANCE_OFF
-  - _PSGLOTEX_OFF
-  - _SELFSHADOWSHADOWTATVIEWDIRECTION_OFF
-  - _SHOWNORMAL_OFF
-  - _SPECMODE_OFF
-  - _STIL_OFF
-  - _TEXTUREBLENDINGMODE_MULTIPLY
-  - _TEXTUREPATTERNSTYLE_OFF
   - _UNITYSHADOWMODE_NONE
-  - _USESECONDARYCUTOUT_OFF
-  - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
-  - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
@@ -200,7 +176,7 @@ Material:
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CelExtraEnabled: 0
-    - _CelNumSteps: 3
+    - _CelNumSteps: 5
     - _CelPrimaryMode: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -226,8 +202,8 @@ Material:
     - _FlatRimEdgeSmoothness: 0.263
     - _FlatRimLightAlign: 0.398
     - _FlatRimSize: 0
-    - _FlatSpecularEdgeSmoothness: 0.352
-    - _FlatSpecularSize: 0.739
+    - _FlatSpecularEdgeSmoothness: 0
+    - _FlatSpecularSize: 0.77
     - _Flatness: 0.567
     - _FlatnessExtra: 1
     - _GIFlatShade: 0
@@ -248,14 +224,14 @@ Material:
     - _GradientCenterY: 0
     - _GradientEnabled: 0
     - _GradientSize: 1.72
-    - _HighlightColorPower: 1
+    - _HighlightColorPower: 1.03
     - _LigIgnoYNorDir: 0
     - _LightAffectOutlineColor: 0
     - _LightAffectRimLightColor: 0
     - _LightAffectShadow: 0
-    - _LightContribution: 0.667
+    - _LightContribution: 1
     - _LightFalloffAffectShadowT: 0
-    - _LightFalloffSize: 0.281
+    - _LightFalloffSize: 0.462
     - _LightFalloffSoftness: 1
     - _LightIntensity: 1
     - _LightmapDirectionPitch: 0
@@ -340,7 +316,7 @@ Material:
     - _SelfLitHighContrast: 1
     - _SelfLitIntensity: 0
     - _SelfLitPower: 2
-    - _SelfShadingSize: 0.528
+    - _SelfShadingSize: 1
     - _SelfShadingSizeExtra: 0.604
     - _SelfShadowAffectedByLightShadowStrength: 1
     - _SelfShadowHardness: 0.587
@@ -349,7 +325,7 @@ Material:
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.934
     - _ShadowColorTexturePower: 0
-    - _ShadowEdgeSize: 0.253
+    - _ShadowEdgeSize: 0.269
     - _ShadowEdgeSizeExtra: 0.249
     - _ShadowHardness: 0
     - _ShadowTColorPower: 1
@@ -381,8 +357,8 @@ Material:
     - _TriPlaTile: 1
     - _UnityShadowMode: 0
     - _UnityShadowOcclusion: 0
-    - _UnityShadowPower: 0.691
-    - _UnityShadowSharpness: 3.38
+    - _UnityShadowPower: 0.562
+    - _UnityShadowSharpness: 6.02
     - _UseSecondaryCutout: 0
     - _UseTLB: 0
     - _VertexColorBlueAffectOutlineWitdh: 0
@@ -392,22 +368,22 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9490196, g: 0.67058825, b: 0.5686275, a: 1}
+    - _BaseColor: {r: 1, g: 0.6816747, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
-    - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorDimExtra: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-    - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
+    - _ColorDim: {r: 0.7830189, g: 0.65513736, b: 0.380429, a: 1}
+    - _ColorDimCurve: {r: 1, g: 0.6816747, b: 0, a: 1}
+    - _ColorDimExtra: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _ColorDimSteps: {r: 1, g: 0.6816747, b: 0, a: 1}
     - _ColorGradient: {r: 0.9490196, g: 0.67058825, b: 0.5686274, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatSpecularColor: {r: 1.5471698, g: 0.5792528, b: 0.15325738, a: 1}
+    - _FlatSpecularColor: {r: 1.5589383, g: 0.63808566, b: 0.22795795, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 1, g: 0.63518953, b: 0.3066038, a: 1}
+    - _MainColor: {r: 1.1486983, g: 0.61631864, b: 0.13545969, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}

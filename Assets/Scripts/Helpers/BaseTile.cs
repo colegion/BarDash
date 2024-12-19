@@ -37,6 +37,7 @@ namespace Helpers
                 cloakMesh.enabled = true;
                 cloakMesh.material.SetColor("_SideColor", Utilities.GetColor(_tileColor));
                 cloakMesh.material.SetColor("_TopColor", Utilities.GetColor(_tileColor));
+                SetTransform(new Vector3(_x, -0.329f, _y));
             }
             else
             {
@@ -50,6 +51,10 @@ namespace Helpers
         {
             transform.SetParent(GameController.Instance.GetParentByType(TileArea));
             transform.localPosition = new Vector3(_x, 0, _y);
+        }
+        public virtual void SetTransform(Vector3 position)
+        {
+            transform.localPosition = position;
         }
 
         private void SelCloakMesh()
@@ -81,7 +86,7 @@ namespace Helpers
         {
             return _layer;
         }
-        
+
         public bool IsMoving()
         {
             return isMoving;
@@ -99,6 +104,11 @@ namespace Helpers
 
         public virtual void Move(Transform target, Action onComplete = null)
         {
+            throw new NotImplementedException();
+        }
+        public virtual void Move(Vector3 targetVector)
+        {
+
             throw new NotImplementedException();
         }
 

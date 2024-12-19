@@ -27,6 +27,7 @@ Material:
   m_ValidKeywords:
   - N_F_ESSAO_ON
   - N_F_NLASOBF_ON
+  - N_F_RELGI_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   m_InvalidKeywords:
@@ -41,6 +42,7 @@ Material:
   - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
   - _LIGHTAFFECTSHADOW_OFF
   - _LIGHTFALLOFFAFFECTSHADOWT_OFF
+  - _LIGIGNOYNORDIR_OFF
   - _MCIALO_OFF
   - _MIXMAINTEXTOOUTLINE_OFF
   - _MVCOL_OFF
@@ -250,7 +252,7 @@ Material:
     - _GradientEnabled: 0
     - _GradientSize: 1.72
     - _HighlightColorPower: 1
-    - _LigIgnoYNorDir: 1
+    - _LigIgnoYNorDir: 0
     - _LightAffectOutlineColor: 0
     - _LightAffectRimLightColor: 0
     - _LightAffectShadow: 0
@@ -321,7 +323,7 @@ Material:
     - _Parallax: 0.005
     - _PointSpotlightIntensity: 0
     - _QueueOffset: 0
-    - _RELG: 0
+    - _RELG: 1
     - _ReceiveShadows: 1
     - _ReduSha: 0.5
     - _RefMetallic: 0
@@ -344,15 +346,15 @@ Material:
     - _SelfShadingSize: 0.528
     - _SelfShadingSizeExtra: 0.604
     - _SelfShadowAffectedByLightShadowStrength: 0
-    - _SelfShadowHardness: 0.618
+    - _SelfShadowHardness: 0.726
     - _SelfShadowRealTimeShadowColorPower: 1
-    - _SelfShadowRealtimeShadowIntensity: 0.798
+    - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.874
     - _ShadowColorTexturePower: 0
     - _ShadowEdgeSize: 0.253
     - _ShadowEdgeSizeExtra: 0.249
-    - _ShadowHardness: 0
+    - _ShadowHardness: 0.525
     - _ShadowTColorPower: 1
     - _ShadowTHardness: 1
     - _ShadowTIntensity: 1
@@ -408,7 +410,7 @@ Material:
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+    - _MainColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}

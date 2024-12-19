@@ -31,23 +31,42 @@ public class EffectController : MonoBehaviour
         }
 
     }
-    public void PlayEffect(string effectName, Vector3 effectPosition, Vector3 effectEulerAngles, Vector3 effectScale)
+    public Effect PlayEffect(string effectName, Vector3 effectPosition, Vector3 effectEulerAngles, Vector3 effectScale)
     {
         Effect pooledEffect = PoolManager.Instance.DequeueItemFromPool<Effect>(effectName);
         pooledEffect.transform.position = effectPosition;
         pooledEffect.transform.eulerAngles = effectEulerAngles;
         pooledEffect.transform.localScale = effectScale;
         pooledEffect.effectParticle.Play();
+        return pooledEffect;
 
     }
-    public void PlayEffect(string effectName, Vector3 effectPosition, Quaternion effectRotation, Vector3 effectScale)
+    public Effect PlayEffect(string effectName, Vector3 effectPosition, Quaternion effectRotation, Vector3 effectScale)
     {
         Effect pooledEffect = PoolManager.Instance.DequeueItemFromPool<Effect>(effectName);
         pooledEffect.transform.position = effectPosition;
         pooledEffect.transform.rotation = effectRotation;
         pooledEffect.transform.localScale = effectScale;
         pooledEffect.effectParticle.Play();
+        return pooledEffect;
     }
+    public Effect PlayEffectAndSetParent(string effectName, Vector3 effectLocalPosition, Transform parentObject, Quaternion effectLocalRotation, Vector3 effectlocalScale)
+    {
+        Effect pooledEffect = PoolManager.Instance.DequeueItemFromPool<Effect>(effectName);
+        pooledEffect.transform.SetParent(parentObject);
+        pooledEffect.transform.localPosition = effectLocalPosition;
+        pooledEffect.transform.localRotation = effectLocalRotation;
+        pooledEffect.transform.localScale = effectlocalScale;
+        pooledEffect.effectParticle.Play();
+        return pooledEffect;
+
+
+    }
+    public void StopEffect(Effect effect)
+    {
+        effect.effectParticle.Stop();
+    }
+
 
 }
 

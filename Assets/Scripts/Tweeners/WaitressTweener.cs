@@ -40,7 +40,7 @@ namespace Tweeners
             }
 
             var configToUse = _tweenConfigDictionary[moveType];
-            waitress.transform.DOMove(target, configToUse.duration)
+            sequence.Append(waitress.transform.DOMove(target, configToUse.duration)
                 .SetEase(configToUse.curve)
                 .OnComplete(
                     () =>
@@ -49,7 +49,7 @@ namespace Tweeners
                         {
                             onComplete?.Invoke();
                         }
-                    });
+                    }));
         }
 
         public void HandleSuccessMovement(Waitress waitress, Vector3 target, TweenType moveType, Action onComplete)
