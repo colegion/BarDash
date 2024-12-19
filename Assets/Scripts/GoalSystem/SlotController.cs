@@ -142,7 +142,7 @@ namespace GoalSystem
                 waitress.SetProcess(true);
                 HandleOnWaitressReachedSlot(waitress);
                 
-                yield return new WaitForSeconds(0.20f);
+                yield return new WaitForSeconds(0.10f);
             }
 
             _processCount--;
